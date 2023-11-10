@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import postRoutes from './routes/posts.js';
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -11,6 +12,9 @@ app.use(cors());
 app.use(morgan('common'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+/* ROUTER */
+app.use('/posts', postRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 8080;
