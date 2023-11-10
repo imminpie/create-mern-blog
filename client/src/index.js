@@ -7,6 +7,9 @@ import PostList from 'pages/postPage/PostList';
 import PostCreate from 'pages/postPage/PostCreate';
 import PostRead from 'pages/postPage/PostRead';
 import PostUpdate from 'pages/postPage/PostUpdate';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 );
