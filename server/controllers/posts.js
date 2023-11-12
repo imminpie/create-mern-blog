@@ -3,6 +3,7 @@ import Post from '../models/Post.js';
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
+    console.log(req.body);
     const { title, content } = req.body;
     const newPost = new Post({ title, content });
     await newPost.save();

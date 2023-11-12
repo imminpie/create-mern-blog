@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import MDEditor from '@uiw/react-md-editor';
 
 const API_URL = process.env.REACT_APP_BASIC_URL;
 
@@ -27,21 +28,25 @@ export default function PostRead() {
   return (
     <>
       <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mx-auto mt-2 max-w-2xl py-12 lg:mx-0 lg:max-w-none '>
+        <div className='mx-auto mt-2 max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
           <div className='text-center'>
             <h1 className='text-3xl font-bold tracking-tight'>{post.title}</h1>
             <p className='mt-2 text-sm text-gray-500'>Michael Foster / {new Date(post.updatedAt).toLocaleDateString()}</p>
           </div>
-          <p className='mt-7 pb-12 text-base leading-7 text-gray-700'>{post.content}</p>
+          <div className='mt-7 pb-12 text-base leading-7 text-gray-700'>
+            <MDEditor.Markdown source={`${post.content}`} />
+          </div>
         </div>
       </section>
-      <footer className='fixed bottom-0 left-0 right-0 mx-auto max-w-7xl bg-white px-6 shadow-[0px_0px_8px_rgba(0,0,0,0.1)] lg:px-8'>
-        <div className='mx-auto max-w-2xl lg:mx-0 lg:max-w-none'>
-          <div className='flex flex-col py-6 sm:flex-row sm:justify-end'>
-            <button onClick={() => navigate(`/posts/${id}/edit`)} className=' bg-teal-400 px-7 py-2 font-bold text-white transition-colors hover:bg-teal-500'>
+      <footer className='fixed bottom-0 left-0 right-0 z-50 w-full bg-white shadow-[0px_0px_8px_rgba(0,0,0,0.1)]'>
+        <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+          <div className='mx-auto mt-2 max-w-2xl py-6 text-end lg:mx-0 lg:max-w-none'>
+            <button type='button' onClick={() => navigate('/')} className='mb-2 w-full bg-neutral-300 py-2 font-bold text-white transition-colors hover:bg-neutral-400 sm:mb-0 sm:w-28'>
+              나가기
+            </button>
+            <button type='submit' onClick={() => navigate(`/posts/${id}/edit`)} className='w-full bg-teal-400 py-2 font-bold text-white transition-colors hover:bg-teal-500 sm:mb-0 sm:ml-2 sm:w-28'>
               수정
             </button>
-            <button className='ml-2 bg-neutral-300 px-7 py-2 font-bold text-white transition-colors hover:bg-neutral-400'>삭제</button>
           </div>
         </div>
       </footer>

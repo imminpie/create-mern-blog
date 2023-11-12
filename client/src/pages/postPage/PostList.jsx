@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { useQuery } from '@tanstack/react-query';
+import RemoveMarkdown from 'remove-markdown';
 
 const API_URL = process.env.REACT_APP_BASIC_URL;
 
@@ -35,7 +36,7 @@ export default function PostList() {
               </div>
               <div className='group relative'>
                 <h3 className='mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600'>{post.title}</h3>
-                <p className='mt-5 line-clamp-3 text-sm leading-6 text-gray-600'>{post.content}</p>
+                <p className='mt-5 line-clamp-3 text-sm leading-6 text-gray-600'>{RemoveMarkdown(post.content)}</p>
               </div>
             </Link>
             <div className='relative mt-8 flex items-center gap-x-2'>

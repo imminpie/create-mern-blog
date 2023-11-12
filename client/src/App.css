@@ -1,0 +1,8 @@
+.w-md-editor-text-input::placeholder {
+  font-family: 'Noto Sans KR';
+  font-size: 1rem;
+}
+
+.error-highlight::placeholder {
+  color: #f00;
+}
