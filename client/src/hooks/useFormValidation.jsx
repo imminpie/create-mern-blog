@@ -9,8 +9,8 @@ export default function useFormValidation() {
     }
   };
 
-  const isFormValid = ({ formData }) => {
-    const { title, content } = formData;
+  const isFormValid = ({ post }) => {
+    const { title, content } = post;
     const titleInput = document.querySelector('[name="title"]');
     const contentInput = document.querySelector('[name="content"]');
 
