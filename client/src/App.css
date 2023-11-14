@@ -1,3 +1,8 @@
+.wmde-markdown {
+  color: inherit !important;
+  background-color: inherit !important;
+}
+
 .w-md-editor-text-input::placeholder {
   font-family: 'Noto Sans KR';
   font-size: 1rem;

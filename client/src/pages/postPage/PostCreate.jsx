@@ -25,7 +25,7 @@ export default function PostCreate() {
 
   return (
     <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-      <div className='mx-auto mt-2 max-w-2xl py-12 lg:mx-0 lg:max-w-none '>
+      <div className='mx-auto mt-2 max-w-2xl py-8 lg:mx-0 lg:max-w-none '>
         <PostForm onSubmit={handleAddPost} initialValue={{}} />
       </div>
     </section>

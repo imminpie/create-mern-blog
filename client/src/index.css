@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-main: 245 245 245;
+    --color-sub: 255 255 255;
+    --color-title: 38 38 38;
+    --color-content: 64 64 64;
+    --color-other: 115 115 115;
+  }
+
+  :root[data-mode='dark'] {
+    --color-main: 23 23 23;
+    --color-sub: 38 38 38;
+    --color-title: 229 229 229;
+    --color-content: 212 212 212;
+    --color-other: 163 163 163;
+  }
+}
+
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .notosanskr * {
@@ -10,6 +28,7 @@
 
 body {
   margin: 0;
+  height: 100vh;
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
