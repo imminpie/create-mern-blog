@@ -26,7 +26,7 @@ export default function PostList() {
           <article key={post._id} className='bg-sub flex max-w-2xl flex-col items-start justify-between rounded-md p-5 shadow-[0px_4px_16px_0px_rgba(0,0,0,0.04)]'>
             <Link to={`/posts/${post._id}`}>
               <div className='group relative'>
-                <h3 className='text-title group-hover:text-content mt-3 text-lg font-semibold leading-6'>{post.title}</h3>
+                <h3 className='text-title group-hover:text-content mt-3 line-clamp-1 text-lg font-semibold leading-6'>{post.title}</h3>
                 <p className='text-content mt-5 line-clamp-3 text-sm leading-6'>{RemoveMarkdown(post.content)}</p>
               </div>
             </Link>
