@@ -20,6 +20,12 @@
   }
 }
 
+@layer components {
+  .card {
+    @apply flex max-w-2xl flex-col items-start justify-between rounded-md bg-sub p-5 shadow-[0px_4px_16px_0px_rgba(0,0,0,0.04)];
+  }
+}
+
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .notosanskr * {

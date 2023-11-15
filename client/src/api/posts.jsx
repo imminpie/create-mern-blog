@@ -11,6 +11,11 @@ export async function fetchPost(id) {
   return response.data;
 }
 
+export async function getSearch(keyword) {
+  const response = await axios.get(`http://localhost:5000/posts/search`, { params: { q: keyword } });
+  return response.data;
+}
+
 /* POST */
 export async function createPost(newPost) {
   const response = await axios.post(`http://localhost:5000/posts`, newPost);
