@@ -7,6 +7,7 @@ import PostList from 'pages/postPage/PostList';
 import PostCreate from 'pages/postPage/PostCreate';
 import PostRead from 'pages/postPage/PostRead';
 import PostUpdate from 'pages/postPage/PostUpdate';
+import Search from 'pages/search/Search';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: '/posts/new', element: <PostCreate /> },
       { path: '/posts/:id', element: <PostRead /> },
       { path: '/posts/:id/edit', element: <PostUpdate /> },
+      { path: '/search', element: <Search /> },
     ],
   },
 ]);
