@@ -18,7 +18,7 @@ export default function Navbar() {
               <MagnifyingGlassIcon className='h-5 w-5' />
             </Link>
             <button className='h-5 w-5' onClick={toggleDarkMode}>
-              {!darkMode ? <SunIcon /> : <MoonIcon />}
+              {darkMode ? <MoonIcon className={darkMode ? 'animate-darkMode' : 'opacity-0'} /> : <SunIcon className={!darkMode ? 'animate-darkMode' : 'opacity-0'} />}
             </button>
             <DropdownMenu />
           </div>

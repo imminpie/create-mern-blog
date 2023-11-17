@@ -15,6 +15,15 @@ module.exports = {
         accentHover: '#5ac490',
         closeHover: '#b5b5b5',
       },
+      keyframes: {
+        darkMode: {
+          '0%': { opacity: 0, transform: 'rotate(-120deg)' },
+          '100%': { opacity: 1, transform: 'rotate(0)' },
+        },
+      },
+      animation: {
+        darkMode: 'darkMode 0.4s ease-in-out ',
+      },
     },
   },
   plugins: [],

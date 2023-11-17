@@ -20,7 +20,7 @@ export default function Post({ data }) {
             <div className='relative mt-8 flex w-full items-center justify-between gap-x-2 text-xs text-other'>
               <div className='flex items-center gap-x-2'>
                 <UserCircleIcon className='h-6 w-6' />
-                <p className='font-semibold'>윤딴딴</p>
+                <p>윤딴딴</p>
               </div>
               <p>{formatAgo(data.updatedAt, 'ko')}</p>
             </div>

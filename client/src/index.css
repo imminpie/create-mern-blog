@@ -26,16 +26,16 @@
   }
 }
 
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 .notosanskr * {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'nanumsquare', sans-serif;
 }
 
 body {
   margin: 0;
   height: 100vh;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'nanumsquare', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
