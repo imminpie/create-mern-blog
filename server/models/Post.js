@@ -10,6 +10,9 @@ const postSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    tags: {
+      type: [String],
+    },
   },
   { timestamps: true }
 );

@@ -23,7 +23,7 @@ export default function PostUpdate() {
     mutationFn: updatePost,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
-      navigate('/');
+      navigate(`/posts/${id}`);
     },
     onError: async (error) => {
       console.error(`An error occurred: ${error.message}`);

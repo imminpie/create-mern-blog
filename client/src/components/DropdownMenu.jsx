@@ -29,7 +29,7 @@ export default function DropdownMenu() {
           <div className='py-1'>
             <Menu.Item>
               {({ active }) => (
-                <Link to='/posts/new' className={classNames(active ? 'text-teal-500' : 'text-title', 'block px-4 py-2 text-sm')}>
+                <Link to='/posts/new' className={classNames(active ? 'text-accent' : 'text-title', 'block px-4 py-2 text-sm')}>
                   새 글 작성
                 </Link>
               )}
@@ -37,7 +37,7 @@ export default function DropdownMenu() {
             <form method='POST' action='#'>
               <Menu.Item>
                 {({ active }) => (
-                  <button type='submit' className={classNames(active ? 'text-teal-500' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
+                  <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
                     로그인
                   </button>
                 )}
