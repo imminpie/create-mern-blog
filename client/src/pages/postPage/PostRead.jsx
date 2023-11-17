@@ -5,6 +5,7 @@ import { deletePost, fetchPost } from 'api/posts';
 import MDEditor from '@uiw/react-md-editor';
 import useModals from 'hooks/useModals';
 import Modals from 'components/Modals';
+import { formatAgo } from 'util/date';
 
 export default function PostRead() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ export default function PostRead() {
         <div className='mx-auto mt-2 max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
           <div className='text-center'>
             <h1 className='text-3xl font-bold tracking-tight text-title'>{post.title}</h1>
-            <p className='mt-2 text-sm text-other'>Michael Foster / {new Date(post.updatedAt).toLocaleDateString()}</p>
+            <p className='mt-3 text-sm text-other'>윤딴딴 / {formatAgo(post.updatedAt, 'ko')}</p>
           </div>
           <div className='py-3 text-end text-other'>
             <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>

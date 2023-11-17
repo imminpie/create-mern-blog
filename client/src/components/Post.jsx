@@ -2,6 +2,7 @@ import React from 'react';
 import RemoveMarkdown from 'remove-markdown';
 import { Link, useLocation } from 'react-router-dom';
 import { UserCircleIcon } from '@heroicons/react/20/solid';
+import { formatAgo } from 'util/date';
 
 export default function Post({ data }) {
   const location = useLocation();
@@ -19,9 +20,9 @@ export default function Post({ data }) {
             <div className='relative mt-8 flex w-full items-center justify-between gap-x-2 text-xs text-other'>
               <div className='flex items-center gap-x-2'>
                 <UserCircleIcon className='h-6 w-6' />
-                <p className='font-semibold'>Michael Foster</p>
+                <p className='font-semibold'>윤딴딴</p>
               </div>
-              <p>{new Date(data.updatedAt).toLocaleDateString()}</p>
+              <p>{formatAgo(data.updatedAt, 'ko')}</p>
             </div>
           </article>
         ))}
