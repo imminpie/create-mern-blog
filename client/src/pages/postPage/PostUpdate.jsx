@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
+import LoadingSpinner from 'components/LoadingSpinner';
+import Error from 'components/Error';
 
 export default function PostUpdate() {
   const { id } = useParams();
@@ -34,8 +36,8 @@ export default function PostUpdate() {
     updatePostMutation.mutate({ id, ...updatedPost });
   };
 
-  if (isLoading) return 'loading...';
-  if (isError) return `Error: ${error.message}`;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <Error message={error.message} />;
 
   return (
     <section className='mx-auto max-w-7xl px-6 lg:px-8'>

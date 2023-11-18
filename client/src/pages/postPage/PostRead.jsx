@@ -6,6 +6,8 @@ import MDEditor from '@uiw/react-md-editor';
 import useModals from 'hooks/useModals';
 import Modals from 'components/Modals';
 import { formatAgo } from 'util/date';
+import LoadingSpinner from 'components/LoadingSpinner';
+import Error from 'components/Error';
 
 export default function PostRead() {
   const { id } = useParams();
@@ -39,8 +41,8 @@ export default function PostRead() {
     handleModalStateChange();
   };
 
-  if (isLoading) return 'Loading...';
-  if (isError) return `Error: ${error.message}`;
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <Error message={error.message} />;
 
   return (
     <>
