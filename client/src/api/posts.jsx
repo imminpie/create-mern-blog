@@ -16,6 +16,11 @@ export async function getSearch(keyword) {
   return response.data;
 }
 
+export async function getSearchTags(tag) {
+  const response = await axios.get(`http://localhost:5000/posts/tags`, { params: { q: tag } });
+  return response.data;
+}
+
 /* POST */
 export async function createPost(newPost) {
   const response = await axios.post(`http://localhost:5000/posts`, newPost);

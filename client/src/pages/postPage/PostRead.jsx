@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { deletePost, fetchPost } from 'api/posts';
 import MDEditor from '@uiw/react-md-editor';
 import useModals from 'hooks/useModals';
@@ -60,9 +60,9 @@ export default function PostRead() {
           </div>
           <div className=''>
             {post.tags.map((tag, idx) => (
-              <span key={idx} className='mb-3 mr-3 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
+              <Link to={`/tags/${tag}`} key={idx} className='mb-3 mr-3 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
                 # {tag}
-              </span>
+              </Link>
             ))}
           </div>
           <div className='mt-7 pb-12 text-base leading-7 text-title'>

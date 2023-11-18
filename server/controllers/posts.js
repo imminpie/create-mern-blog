@@ -48,6 +48,16 @@ export const getSearch = async (req, res) => {
   }
 };
 
+export const getSearchTags = async (req, res) => {
+  try {
+    const { q: tag } = req.query;
+    const posts = await Post.find({ tags: tag });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
 /* UPDATE */
 export const updatePost = async (req, res) => {
   try {

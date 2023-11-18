@@ -9,6 +9,7 @@ import PostRead from 'pages/postPage/PostRead';
 import PostUpdate from 'pages/postPage/PostUpdate';
 import Search from 'pages/search/Search';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Tags from 'pages/search/Tags';
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: '/posts/:id', element: <PostRead /> },
       { path: '/posts/:id/edit', element: <PostUpdate /> },
       { path: '/search', element: <Search /> },
+      { path: '/tags/:tag', element: <Tags /> },
     ],
   },
 ]);
