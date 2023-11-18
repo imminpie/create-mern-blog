@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PostList from 'pages/postPage/PostList';
-import PostCreate from 'pages/postPage/PostCreate';
-import PostRead from 'pages/postPage/PostRead';
-import PostUpdate from 'pages/postPage/PostUpdate';
-import Search from 'pages/search/Search';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Tags from 'pages/search/Tags';
+import LoadingSpinner from 'components/LoadingSpinner';
+import PostList from 'pages/postPage/PostList';
+import NotFound from 'pages/NotFound';
+
+const PostCreate = lazy(() => import('pages/postPage/PostCreate'));
+const PostRead = lazy(() => import('pages/postPage/PostRead'));
+const PostUpdate = lazy(() => import('pages/postPage/PostUpdate'));
+const Search = lazy(() => import('pages/search/Search'));
+const Tags = lazy(() => import('pages/search/Tags'));
 
 const queryClient = new QueryClient();
 
@@ -17,7 +20,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <p>Not Found 😣</p>,
+    errorElement: <NotFound />,
     children: [
       { index: true, element: <PostList /> },
       { path: '/posts/new', element: <PostCreate /> },
@@ -33,7 +36,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </QueryClientProvider>
   </React.StrictMode>,
 );

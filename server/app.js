@@ -19,7 +19,7 @@ app.use('/posts', postRoutes);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 8080;
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.DB_URL);
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
