@@ -15,7 +15,7 @@ export default function Tags() {
   return (
     <section className='mx-auto max-w-7xl px-6 lg:px-8'>
       <div className='mx-auto max-w-2xl py-10 lg:mx-0 lg:max-w-none'>
-        <h1 className='text-3xl font-bold'># {tag}</h1>
+        <h1 className='text-3xl font-bold text-title'># {tag}</h1>
         {data?.length > 0 && <SearchResult isLoading={isLoading} isError={isError} error={error} data={data} />}
       </div>
     </section>
