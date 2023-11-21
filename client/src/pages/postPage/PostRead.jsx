@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
@@ -17,6 +17,7 @@ export default function PostRead() {
   const queryClient = useQueryClient();
   const [isOpen, handleModalStateChange] = useModals();
   const token = useStore((state) => state.token);
+  const user = useStore((state) => state.user);
   const { isAuth } = useAuthContext();
 
   const {
@@ -50,11 +51,13 @@ export default function PostRead() {
   return (
     <>
       <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mx-auto mt-2 max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
+        <div className='mx-auto max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
           <h1 className='text-3xl font-bold tracking-tight text-title'>{post.title}</h1>
           <div className='mt-3 flex justify-between text-sm text-title'>
-            <p>윤딴딴 &#124; {formatAgo(post.updatedAt, 'ko')}</p>
-            {isAuth && (
+            <p>
+              {post.displayName} &#124; {formatAgo(post.updatedAt, 'ko')}
+            </p>
+            {isAuth && post.writer === user?._id && (
               <div className='text-other'>
                 <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
                   수정

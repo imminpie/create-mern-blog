@@ -8,6 +8,7 @@ import useStore from 'state/index.js';
 export default function PostCreate() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const user = useStore((state) => state.user);
   const token = useStore((state) => state.token);
 
   const createPostMutation = useMutation({
@@ -21,7 +22,8 @@ export default function PostCreate() {
     },
   });
 
-  const handleAddPost = (post) => {
+  const handleAddPost = (newPost) => {
+    const post = { ...newPost, user: user._id };
     createPostMutation.mutate({ post, token });
   };
 

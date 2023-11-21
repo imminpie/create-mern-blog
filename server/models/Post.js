@@ -13,6 +13,9 @@ const postSchema = mongoose.Schema(
     tags: {
       type: [String],
     },
+    writer: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

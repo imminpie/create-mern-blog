@@ -1,10 +1,11 @@
 import Post from '../models/Post.js';
+import User from '../models/User.js';
 
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
-    const { title, content, tags } = req.body;
-    const newPost = new Post({ title, content, tags });
+    const { title, content, tags, user: writer } = req.body;
+    const newPost = new Post({ title, content, tags, writer });
     await newPost.save();
     const post = await Post.find();
     res.status(201).json(post);
@@ -17,7 +18,16 @@ export const createPost = async (req, res) => {
 export const getPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-    res.status(200).json(posts);
+    const users = await Promise.all(posts.map((post) => User.findById(post.writer)));
+
+    const formattedPosts = posts.map((post, idx) => ({
+      ...post.toObject(),
+      displayName: users[idx].displayName,
+    }));
+
+    console.log(formattedPosts);
+
+    res.status(200).json(formattedPosts);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -27,7 +37,10 @@ export const getPost = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await Post.findById(id);
-    res.status(200).json(post);
+    const users = await User.findById(post.writer);
+
+    const formattedPosts = { ...post.toObject(), displayName: users.displayName };
+    res.status(200).json(formattedPosts);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
