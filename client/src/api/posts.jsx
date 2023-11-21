@@ -23,18 +23,27 @@ export async function getSearchTags(tag) {
 
 /* POST */
 export async function createPost(newPost) {
-  const response = await axios.post(`http://localhost:5000/posts`, newPost);
+  const { post, token } = newPost;
+  const response = await axios.post(`http://localhost:5000/posts`, post, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.data;
 }
 
 /* UPDATE */
 export async function updatePost(updatedPost) {
-  const response = await axios.patch(`http://localhost:5000/posts/${updatedPost.id}/edit`, updatedPost);
+  const { post, token } = updatedPost;
+  const response = await axios.patch(`http://localhost:5000/posts/${post.id}/edit`, post, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.data;
 }
 
 /* DELETE */
-export async function deletePost(id) {
-  const response = await axios.delete(`http://localhost:5000/posts/${id}`);
+export async function deletePost(deletedPost) {
+  const { id, token } = deletedPost;
+  const response = await axios.delete(`http://localhost:5000/posts/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.data;
 }

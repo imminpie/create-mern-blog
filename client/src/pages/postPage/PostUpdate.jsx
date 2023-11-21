@@ -5,11 +5,13 @@ import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
 import LoadingSpinner from 'components/LoadingSpinner';
 import Error from 'components/Error';
+import useStore from 'state';
 
 export default function PostUpdate() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const token = useStore((state) => state.token);
 
   const {
     isLoading,
@@ -33,7 +35,8 @@ export default function PostUpdate() {
   });
 
   const handleFormSubmit = (updatedPost) => {
-    updatePostMutation.mutate({ id, ...updatedPost });
+    const post = { id, ...updatedPost };
+    updatePostMutation.mutate({ post, token });
   };
 
   if (isLoading) return <LoadingSpinner />;

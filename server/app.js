@@ -2,8 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import helmet from 'helmet';
 import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
+import authRoutes from './routes/auth.js';
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -11,10 +13,13 @@ const app = express();
 app.use(cors());
 app.use(morgan('common'));
 app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(express.urlencoded({ extended: true }));
 
 /* ROUTER */
 app.use('/posts', postRoutes);
+app.use('/auth', authRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 8080;

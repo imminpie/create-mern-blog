@@ -13,8 +13,8 @@ const PostRead = lazy(() => import('pages/postPage/PostRead'));
 const PostUpdate = lazy(() => import('pages/postPage/PostUpdate'));
 const Search = lazy(() => import('pages/search/Search'));
 const Tags = lazy(() => import('pages/search/Tags'));
-
-const queryClient = new QueryClient();
+const LoginPage = lazy(() => import('pages/authPage/LoginPage'));
+const RegisterPage = lazy(() => import('pages/authPage/RegisterPage'));
 
 const router = createBrowserRouter([
   {
@@ -28,9 +28,13 @@ const router = createBrowserRouter([
       { path: '/posts/:id/edit', element: <PostUpdate /> },
       { path: '/search', element: <Search /> },
       { path: '/tags/:tag', element: <Tags /> },
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
     ],
   },
 ]);
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

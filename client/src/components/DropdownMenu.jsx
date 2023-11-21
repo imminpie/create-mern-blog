@@ -1,13 +1,24 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/20/solid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useStore from 'state/index.js';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function DropdownMenu() {
+  const navigate = useNavigate();
+  const isAuth = Boolean(useStore((state) => state.token));
+  const setLogout = useStore((state) => state.setLogout);
+
+  const onLogout = async () => {
+    await setLogout();
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
@@ -34,15 +45,25 @@ export default function DropdownMenu() {
                 </Link>
               )}
             </Menu.Item>
-            <form method='POST' action='#'>
-              <Menu.Item>
+            {isAuth ? (
+              <Menu.Item onClick={onLogout}>
                 {({ active }) => (
                   <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
-                    로그인
+                    로그아웃
                   </button>
                 )}
               </Menu.Item>
-            </form>
+            ) : (
+              <Link to='/login'>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
+                      로그인
+                    </button>
+                  )}
+                </Menu.Item>
+              </Link>
+            )}
           </div>
         </Menu.Items>
       </Transition>

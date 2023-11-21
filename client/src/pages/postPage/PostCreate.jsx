@@ -3,10 +3,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import PostForm from 'components/PostForm';
 import { createPost } from 'api/posts';
+import useStore from 'state/index.js';
 
 export default function PostCreate() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const token = useStore((state) => state.token);
 
   const createPostMutation = useMutation({
     mutationFn: createPost,
@@ -20,7 +22,7 @@ export default function PostCreate() {
   });
 
   const handleAddPost = (post) => {
-    createPostMutation.mutate(post);
+    createPostMutation.mutate({ post, token });
   };
 
   return (
