@@ -40,6 +40,7 @@ export const getSearch = async (req, res) => {
       $or: [
         { title: { $regex: '.*' + keyword + '.*', $options: 'i' } },
         { content: { $regex: '.*' + keyword + '.*', $options: 'i' } },
+        { tags: { $regex: '.*' + keyword + '.*', $options: 'i' } },
       ],
     });
     res.status(200).json(posts);
