@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
+import LoadingSpinner from 'components/LoadingSpinner';
 import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
-import LoadingSpinner from 'components/LoadingSpinner';
-import Error from 'components/Error';
+import NotFound from 'pages/NotFound';
 import useStore from 'state';
 
 export default function PostUpdate() {
@@ -17,7 +17,6 @@ export default function PostUpdate() {
     isLoading,
     isError,
     data: post,
-    error,
   } = useQuery({
     queryKey: ['posts', id],
     queryFn: () => fetchPost(id),
@@ -40,7 +39,7 @@ export default function PostUpdate() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <Error message={error.message} />;
+  if (isError) return <NotFound />;
 
   return (
     <section className='mx-auto max-w-7xl px-6 lg:px-8'>

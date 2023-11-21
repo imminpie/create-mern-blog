@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProtectedRoute from 'pages/authPage/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 import PostList from 'pages/postPage/PostList';
 import NotFound from 'pages/NotFound';
@@ -23,9 +24,23 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <PostList /> },
-      { path: '/posts/new', element: <PostCreate /> },
+      {
+        path: '/posts/new',
+        element: (
+          <ProtectedRoute>
+            <PostCreate />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/posts/:id', element: <PostRead /> },
-      { path: '/posts/:id/edit', element: <PostUpdate /> },
+      {
+        path: '/posts/:id/edit',
+        element: (
+          <ProtectedRoute>
+            <PostUpdate />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/search', element: <Search /> },
       { path: '/tags/:tag', element: <Tags /> },
       { path: '/login', element: <LoginPage /> },

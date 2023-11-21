@@ -20,7 +20,7 @@ export default function DropdownMenu() {
   };
 
   return (
-    <Menu as='div' className='relative inline-block text-left'>
+    <Menu as='div' className='relative inline-block h-5 text-left'>
       <div>
         <Menu.Button>
           <UserCircleIcon className='h-5 w-5' aria-hidden='true' />
@@ -45,7 +45,7 @@ export default function DropdownMenu() {
                 </Link>
               )}
             </Menu.Item>
-            {isAuth ? (
+            {isAuth && (
               <Menu.Item onClick={onLogout}>
                 {({ active }) => (
                   <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
@@ -53,16 +53,6 @@ export default function DropdownMenu() {
                   </button>
                 )}
               </Menu.Item>
-            ) : (
-              <Link to='/login'>
-                <Menu.Item>
-                  {({ active }) => (
-                    <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
-                      로그인
-                    </button>
-                  )}
-                </Menu.Item>
-              </Link>
             )}
           </div>
         </Menu.Items>

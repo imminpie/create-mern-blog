@@ -9,7 +9,7 @@ export default function Search() {
   const [search, setSearch] = useState('');
   const debouncedSearchTerm = useDebounce(search, 200);
 
-  const { data, isLoading, error, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['search', debouncedSearchTerm],
     queryFn: () => {
       if (debouncedSearchTerm) {
@@ -26,7 +26,7 @@ export default function Search() {
         <div className='flex items-center border border-neutral-400 bg-sub p-4'>
           <SearchInput search={search} setSearch={setSearch} />
         </div>
-        {data?.length > 0 && <SearchResult isLoading={isLoading} isError={isError} error={error} data={data} />}
+        {data?.length > 0 && <SearchResult isLoading={isLoading} isError={isError} data={data} />}
       </div>
     </section>
   );

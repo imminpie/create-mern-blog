@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { MagnifyingGlassIcon, SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 import { useDarkMode } from 'context/DarkModeContext';
+import { useAuthContext } from 'context/AuthContext';
 import DropdownMenu from 'components/DropdownMenu';
 
 export default function Navbar() {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const { isAuth } = useAuthContext();
 
   return (
     <header className='bg-main'>
@@ -13,14 +15,20 @@ export default function Navbar() {
           <Link to='/' className='text-lg font-bold leading-none text-title'>
             BLOG
           </Link>
-          <div className='grid grid-cols-3 gap-3 text-title'>
+          <div className='flex items-center text-title'>
             <Link to='/search'>
               <MagnifyingGlassIcon className='h-5 w-5' />
             </Link>
-            <button type='button' className='h-5 w-5 transition duration-300' onClick={toggleDarkMode}>
+            <button onClick={toggleDarkMode} type='button' className='mx-4 h-5 w-5 transition delay-200 duration-100 ease-out'>
               {darkMode ? <MoonIcon /> : <SunIcon />}
             </button>
-            <DropdownMenu />
+            {isAuth ? (
+              <DropdownMenu />
+            ) : (
+              <Link to='/login' className='rounded-2xl bg-accent px-3 py-1 text-sm font-semibold text-white hover:bg-accentHover'>
+                로그인
+              </Link>
+            )}
           </div>
         </div>
       </nav>

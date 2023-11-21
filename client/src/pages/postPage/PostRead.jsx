@@ -2,12 +2,13 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
+import { useAuthContext } from 'context/AuthContext';
 import { deletePost, fetchPost } from 'api/posts';
 import MDEditor from '@uiw/react-md-editor';
 import useModals from 'hooks/useModals';
 import Modals from 'components/Modals';
 import { formatAgo } from 'util/date';
-import Error from 'components/Error';
+import NotFound from 'pages/NotFound';
 import useStore from 'state';
 
 export default function PostRead() {
@@ -16,12 +17,12 @@ export default function PostRead() {
   const queryClient = useQueryClient();
   const [isOpen, handleModalStateChange] = useModals();
   const token = useStore((state) => state.token);
+  const { isAuth } = useAuthContext();
 
   const {
     isLoading,
     isError,
     data: post,
-    error,
   } = useQuery({
     queryKey: ['posts', id],
     queryFn: () => fetchPost(id),
@@ -44,7 +45,7 @@ export default function PostRead() {
   };
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <Error message={error.message} />;
+  if (isError) return <NotFound />;
 
   return (
     <>
@@ -53,14 +54,16 @@ export default function PostRead() {
           <h1 className='text-3xl font-bold tracking-tight text-title'>{post.title}</h1>
           <div className='mt-3 flex justify-between text-sm text-title'>
             <p>윤딴딴 &#124; {formatAgo(post.updatedAt, 'ko')}</p>
-            <div className='text-other'>
-              <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
-                수정
-              </button>
-              <button className='ml-3 hover:text-content' onClick={handleModalStateChange}>
-                삭제
-              </button>
-            </div>
+            {isAuth && (
+              <div className='text-other'>
+                <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
+                  수정
+                </button>
+                <button className='ml-3 hover:text-content' onClick={handleModalStateChange}>
+                  삭제
+                </button>
+              </div>
+            )}
           </div>
           {post.tags.map((tag, idx) => (
             <Link to={`/tags/${tag}`} key={idx} className='mb-3 mr-3 mt-5 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
