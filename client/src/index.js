@@ -16,6 +16,7 @@ const Search = lazy(() => import('pages/search/Search'));
 const Tags = lazy(() => import('pages/search/Tags'));
 const LoginPage = lazy(() => import('pages/authPage/LoginPage'));
 const RegisterPage = lazy(() => import('pages/authPage/RegisterPage'));
+const UserPostsView = lazy(() => import('pages/search/UserPostsView'));
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       { path: '/tags/:tag', element: <Tags /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/register', element: <RegisterPage /> },
+      { path: '/:id', element: <UserPostsView /> },
     ],
   },
 ]);

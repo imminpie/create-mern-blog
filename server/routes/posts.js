@@ -1,5 +1,14 @@
 import express from 'express';
-import { createPost, getPosts, getPost, getSearch, getSearchTags, updatePost, deletePost } from '../controllers/posts.js';
+import {
+  createPost,
+  getPosts,
+  getPost,
+  getSearch,
+  getSearchTags,
+  getUserPosts,
+  updatePost,
+  deletePost,
+} from '../controllers/posts.js';
 import { verifyToken } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -8,6 +17,7 @@ const router = express.Router();
 router.get('/', getPosts);
 router.get('/search', getSearch);
 router.get('/tags', getSearchTags);
+router.get('/userPosts/:writer', getUserPosts);
 router.get('/:id', getPost);
 
 /* CREATE */

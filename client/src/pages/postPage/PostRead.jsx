@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { ClockIcon } from '@heroicons/react/24/solid';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
@@ -45,6 +46,11 @@ export default function PostRead() {
     handleModalStateChange();
   };
 
+  const handleUserPosts = () => {
+    const data = { writer: post.writer, displayName: post.displayName };
+    navigate(`/@${post.displayName}`, { state: data });
+  };
+
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <NotFound />;
 
@@ -53,9 +59,13 @@ export default function PostRead() {
       <section className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
           <h1 className='text-3xl font-bold tracking-tight text-title'>{post.title}</h1>
-          <div className='mt-3 flex justify-between text-sm text-title'>
-            <p>
-              {post.displayName} &#124; {formatAgo(post.updatedAt, 'ko')}
+          <div className='mb-6 mt-4 flex justify-between text-sm'>
+            <p className='text-title'>
+              <span className='cursor-pointer hover:underline hover:underline-offset-4' onClick={handleUserPosts}>
+                {post.displayName}
+              </span>
+              <span className='px-2'>|</span>
+              {formatAgo(post.updatedAt, 'ko')}
             </p>
             {isAuth && post.writer === user?._id && (
               <div className='text-other'>
@@ -69,11 +79,11 @@ export default function PostRead() {
             )}
           </div>
           {post.tags.map((tag, idx) => (
-            <Link to={`/tags/${tag}`} key={idx} className='mb-3 mr-3 mt-5 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
+            <Link to={`/tags/${tag}`} key={idx} className='mr-3 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
               # {tag}
             </Link>
           ))}
-          <div className='mt-7 pb-12 text-base leading-7 text-title'>
+          <div className='my-12 text-base leading-7 text-title'>
             <MDEditor.Markdown source={`${post.content}`} />
           </div>
         </div>

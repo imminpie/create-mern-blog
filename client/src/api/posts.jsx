@@ -21,6 +21,11 @@ export async function getSearchTags(tag) {
   return response.data;
 }
 
+export async function getSearchUserPosts(writer) {
+  const response = await axios.get(`http://localhost:5000/posts/userPosts/${writer}`);
+  return response.data;
+}
+
 /* POST */
 export async function createPost(newPost) {
   const { post, token } = newPost;

@@ -1,8 +1,8 @@
 import React from 'react';
+import LoadingSpinner from 'components/LoadingSpinner';
 import { useQuery } from '@tanstack/react-query';
 import { fetchPosts } from 'api/posts';
 import Post from 'components/Post';
-import LoadingSpinner from 'components/LoadingSpinner';
 import NotFound from 'pages/NotFound';
 
 export default function PostList() {

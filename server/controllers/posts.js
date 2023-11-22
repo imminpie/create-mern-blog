@@ -25,8 +25,6 @@ export const getPosts = async (req, res) => {
       displayName: users[idx].displayName,
     }));
 
-    console.log(formattedPosts);
-
     res.status(200).json(formattedPosts);
   } catch (err) {
     res.status(404).json({ error: err.message });
@@ -56,7 +54,15 @@ export const getSearch = async (req, res) => {
         { tags: { $regex: '.*' + keyword + '.*', $options: 'i' } },
       ],
     });
-    res.status(200).json(posts);
+
+    const users = await Promise.all(posts.map((post) => User.findById(post.writer)));
+
+    const formattedPosts = posts.map((post, idx) => ({
+      ...post.toObject(),
+      displayName: users[idx].displayName,
+    }));
+
+    res.status(200).json(formattedPosts);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -66,7 +72,31 @@ export const getSearchTags = async (req, res) => {
   try {
     const { q: tag } = req.query;
     const posts = await Post.find({ tags: tag });
-    res.status(200).json(posts);
+    const users = await Promise.all(posts.map((post) => User.findById(post.writer)));
+
+    const formattedPosts = posts.map((post, idx) => ({
+      ...post.toObject(),
+      displayName: users[idx].displayName,
+    }));
+
+    res.status(200).json(formattedPosts);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
+export const getUserPosts = async (req, res) => {
+  try {
+    const { writer } = req.params;
+    const posts = await Post.find({ writer });
+    const users = await User.findById(writer);
+
+    const formattedPosts = posts.map((post) => ({
+      ...post.toObject(),
+      displayName: users.displayName,
+    }));
+
+    res.status(200).json(formattedPosts);
   } catch (err) {
     res.status(404).json({ error: err.message });
   }

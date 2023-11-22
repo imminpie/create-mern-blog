@@ -15,7 +15,7 @@ export default function Search() {
       if (debouncedSearchTerm) {
         return getSearch(debouncedSearchTerm);
       }
-      return { posts: [] };
+      return [];
     },
     enabled: !!search,
   });
@@ -26,7 +26,7 @@ export default function Search() {
         <div className='flex items-center border border-neutral-400 bg-sub p-4'>
           <SearchInput search={search} setSearch={setSearch} />
         </div>
-        {data?.length > 0 && <SearchResult isLoading={isLoading} isError={isError} data={data} />}
+        {data && <SearchResult isLoading={isLoading} isError={isError} data={data}/>}
       </div>
     </section>
   );
