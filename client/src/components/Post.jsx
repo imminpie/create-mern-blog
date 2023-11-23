@@ -8,10 +8,6 @@ export default function Post({ data }) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleUserPosts = (displayName, writer) => {
-    navigate(`/@${displayName}`, { state: { displayName, writer } });
-  };
-
   const regex = /!\[\]\((.*?)\)/; // 이미지 경로가 있는 패턴을 정의
 
   return (
@@ -40,7 +36,7 @@ export default function Post({ data }) {
             <div className='relative mt-8 flex w-full items-center justify-between gap-x-2 text-xs text-other'>
               <div className='flex items-center gap-x-2'>
                 <UserCircleIcon className='h-6 w-6' />
-                <p className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => handleUserPosts(post.displayName, post.writer)}>
+                <p className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => navigate(`/${post.displayName}`)}>
                   {post.displayName}
                 </p>
               </div>

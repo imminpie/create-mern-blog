@@ -94,10 +94,16 @@ export const getSearchTags = async (req, res) => {
   }
 };
 
-export const getUserPosts = async (req, res) => {
+export const getSearchUserPosts = async (req, res) => {
   try {
-    const { writer } = req.params;
-    const posts = await Post.find({ writer });
+    const { displayName } = req.params;
+
+    const writer = await User.findOne({ displayName }, { _id: 1 });
+    if (!writer) return res.status(200).json([]);
+
+    const posts = await Post.find({ writer: writer._id });
+    if (!posts.length) return res.status(200).json([]);
+
     const users = await User.findById(writer);
 
     const formattedPosts = posts.map((post) => ({

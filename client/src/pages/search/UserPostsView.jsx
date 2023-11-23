@@ -1,16 +1,15 @@
 import React from 'react';
 import SearchResult from 'components/SearchResult';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getSearchUserPosts } from 'api/posts';
 
 export default function UserPostsView() {
-  const { state } = useLocation();
-  const { displayName, writer } = state;
+  const { displayName } = useParams();
 
   const { isLoading, isError, data } = useQuery({
-    queryKey: ['search', writer],
-    queryFn: () => getSearchUserPosts(writer),
+    queryKey: ['search', displayName],
+    queryFn: () => getSearchUserPosts(displayName),
   });
 
   return (

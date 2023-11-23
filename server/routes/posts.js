@@ -5,7 +5,7 @@ import {
   getPost,
   getSearch,
   getSearchTags,
-  getUserPosts,
+  getSearchUserPosts,
   updatePost,
   deletePost,
 } from '../controllers/posts.js';
@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/', getPosts);
 router.get('/search', getSearch);
 router.get('/tags', getSearchTags);
-router.get('/userPosts/:writer', getUserPosts);
+router.get('/userPosts/:displayName', getSearchUserPosts);
 router.get('/:id', getPost);
 
 /* CREATE */

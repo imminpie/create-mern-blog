@@ -42,11 +42,11 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      { path: '/:displayName', element: <UserPostsView /> },
       { path: '/search', element: <Search /> },
       { path: '/tags/:tag', element: <Tags /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/register', element: <RegisterPage /> },
-      { path: '/:id', element: <UserPostsView /> },
     ],
   },
 ]);
