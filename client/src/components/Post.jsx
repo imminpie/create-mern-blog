@@ -20,10 +20,12 @@ export default function Post({ data }) {
         data.map((post) => (
           <article key={post._id} className={`${location.pathname === '/' ? 'card' : 'mb-12'} text-sm text-content`}>
             <Link to={`/posts/${post._id}`}>
-              <div className='group relative'>
+              <div className={`${location.pathname === '/' ? '' : 'lg:grid lg:grid-cols-3 lg:gap-x-8'} group relative`}>
                 {post.content.match(regex) && <img src={post.content.match(regex)[1]} alt='post images' className='h-48 w-full object-cover object-center' loading='lazy' />}
-                <h3 className='mt-3 line-clamp-1 text-lg font-semibold leading-6 text-title group-hover:text-content'>{post.title}</h3>
-                <p className='mt-5 line-clamp-3 leading-6'>{RemoveMarkdown(post.content)}</p>
+                <div className='col-span-2'>
+                  <h3 className='mt-3 line-clamp-1 text-lg font-semibold leading-6 text-title group-hover:text-content'>{post.title}</h3>
+                  <p className='mt-5 line-clamp-3 leading-6'>{RemoveMarkdown(post.content)}</p>
+                </div>
               </div>
             </Link>
             {location.pathname !== '/' && post.tags.length > 0 && (
