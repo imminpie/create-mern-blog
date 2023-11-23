@@ -3,13 +3,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import PostForm from 'components/PostForm';
 import { createPost } from 'api/posts';
-import useStore from 'state/index.js';
+import useUserStore from 'state';
 
 export default function PostCreate() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const user = useStore((state) => state.user);
-  const token = useStore((state) => state.token);
+  const { user } = useUserStore();
+  const { token } = useUserStore();
 
   const createPostMutation = useMutation({
     mutationFn: createPost,

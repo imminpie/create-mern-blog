@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/20/solid';
 import { Link, useNavigate } from 'react-router-dom';
-import useStore from 'state/index.js';
+import useUserStore from 'state/index.js';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -10,8 +10,8 @@ function classNames(...classes) {
 
 export default function DropdownMenu() {
   const navigate = useNavigate();
-  const isAuth = Boolean(useStore((state) => state.token));
-  const setLogout = useStore((state) => state.setLogout);
+  const { token } = useUserStore();
+  const { setLogout } = useUserStore();
 
   const onLogout = async () => {
     await setLogout();
@@ -45,7 +45,7 @@ export default function DropdownMenu() {
                 </Link>
               )}
             </Menu.Item>
-            {isAuth && (
+            {token && (
               <Menu.Item onClick={onLogout}>
                 {({ active }) => (
                   <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>

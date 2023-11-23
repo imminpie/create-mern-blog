@@ -1,9 +1,9 @@
 import LoginForm from 'components/LoginForm';
 import { useNavigate } from 'react-router';
-import useStore from 'state/index.js';
 import { useState } from 'react';
 import { login } from 'api/auth';
 import * as yup from 'yup';
+import useUserStore from 'state';
 
 const loginSchema = yup.object().shape({
   email: yup.string().email('이메일 형식이 올바르지 않습니다.').required('이메일을 입력해 주세요.'),
@@ -18,7 +18,7 @@ const initialValuesLogin = {
 export default function LoginPage() {
   const navigate = useNavigate();
   const [isError, setIsError] = useState(false);
-  const setLogin = useStore((state) => state.setLogin);
+  const { setLogin } = useUserStore();
 
   const onLogin = async (values, onSubmitProps) => {
     try {

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { MagnifyingGlassIcon, SunIcon, MoonIcon } from '@heroicons/react/24/solid';
 import { useDarkMode } from 'context/DarkModeContext';
-import { useAuthContext } from 'context/AuthContext';
 import DropdownMenu from 'components/DropdownMenu';
+import useUserStore from 'state';
 
 export default function Navbar() {
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const { isAuth } = useAuthContext();
+  const { token } = useUserStore();
 
   return (
     <header className='bg-main'>
@@ -22,7 +22,7 @@ export default function Navbar() {
             <button onClick={toggleDarkMode} type='button' className='mx-4 h-5 w-5 transition delay-200 duration-100 ease-out'>
               {darkMode ? <MoonIcon /> : <SunIcon />}
             </button>
-            {isAuth ? (
+            {token ? (
               <DropdownMenu />
             ) : (
               <Link to='/login' className='rounded-2xl bg-accent px-3 py-1 text-sm font-semibold text-white hover:bg-accentHover'>

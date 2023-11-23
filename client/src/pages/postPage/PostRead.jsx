@@ -1,25 +1,22 @@
 import React from 'react';
-import { ClockIcon } from '@heroicons/react/24/solid';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
-import { useAuthContext } from 'context/AuthContext';
 import { deletePost, fetchPost } from 'api/posts';
 import MDEditor from '@uiw/react-md-editor';
 import useModals from 'hooks/useModals';
 import Modals from 'components/Modals';
 import { formatAgo } from 'util/date';
 import NotFound from 'pages/NotFound';
-import useStore from 'state';
+import useUserStore from 'state';
 
 export default function PostRead() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isOpen, handleModalStateChange] = useModals();
-  const token = useStore((state) => state.token);
-  const user = useStore((state) => state.user);
-  const { isAuth } = useAuthContext();
+  const { token } = useUserStore();
+  const { user } = useUserStore();
 
   const {
     isLoading,
@@ -67,7 +64,7 @@ export default function PostRead() {
               <span className='px-2'>|</span>
               {formatAgo(post.updatedAt, 'ko')}
             </p>
-            {isAuth && post.writer === user?._id && (
+            {token && post.writer === user?._id && (
               <div className='text-other'>
                 <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
                   수정

@@ -5,13 +5,13 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
 import NotFound from 'pages/NotFound';
-import useStore from 'state';
+import useUserStore from 'state';
 
 export default function PostUpdate() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const token = useStore((state) => state.token);
+  const { token } = useUserStore();
 
   const {
     isLoading,
