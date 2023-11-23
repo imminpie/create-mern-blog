@@ -14,6 +14,15 @@ export const createPost = async (req, res) => {
   }
 };
 
+export const setImagePosts = async (req, res) => {
+  try {
+    const file = req.file.filename;
+    res.status(201).json({ picturePath: file });
+  } catch (err) {
+    res.status(409).json({ error: err.message });
+  }
+};
+
 /* READ */
 export const getPosts = async (req, res) => {
   try {

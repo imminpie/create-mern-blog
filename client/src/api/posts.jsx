@@ -35,6 +35,11 @@ export async function createPost(newPost) {
   return response.data;
 }
 
+export async function uploadPicture(formData) {
+  const response = await axios.post('http://localhost:5000/posts/imagePosts', formData);
+  return response.data;
+}
+
 /* UPDATE */
 export async function updatePost(updatedPost) {
   const { post, token } = updatedPost;

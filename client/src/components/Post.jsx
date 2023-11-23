@@ -12,6 +12,8 @@ export default function Post({ data }) {
     navigate(`/@${displayName}`, { state: { displayName, writer } });
   };
 
+  const regex = /!\[\]\((.*?)\)/; // 이미지 경로가 있는 패턴을 정의
+
   return (
     <>
       {data &&
@@ -19,6 +21,7 @@ export default function Post({ data }) {
           <article key={post._id} className={`${location.pathname === '/' ? 'card' : 'mb-12'} text-sm text-content`}>
             <Link to={`/posts/${post._id}`}>
               <div className='group relative'>
+                {post.content.match(regex) && <img src={post.content.match(regex)[1]} alt='post images' className='h-48 w-full object-cover object-center' loading='lazy' />}
                 <h3 className='mt-3 line-clamp-1 text-lg font-semibold leading-6 text-title group-hover:text-content'>{post.title}</h3>
                 <p className='mt-5 line-clamp-3 leading-6'>{RemoveMarkdown(post.content)}</p>
               </div>

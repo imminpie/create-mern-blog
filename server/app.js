@@ -1,13 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
+import { setImagePosts } from './controllers/posts.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 /* CONFIGURATIONS */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -16,6 +22,21 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(express.urlencoded({ extended: true }));
+app.use('/assets', express.static(path.join(__dirname, '/public/assets')));
+
+/* FILE STORAGE */
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/assets');
+  },
+  filename: function (req, file, cb) {
+    file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8'); // 한글 깨짐 문제 해결
+    cb(null, new Date().valueOf() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage });
+
+app.post('/posts/imagePosts', upload.single('picture'), setImagePosts);
 
 /* ROUTER */
 app.use('/posts', postRoutes);
