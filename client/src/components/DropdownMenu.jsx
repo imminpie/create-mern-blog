@@ -12,7 +12,7 @@ export default function DropdownMenu() {
   const navigate = useNavigate();
   const { token } = useUserStore();
   const { setLogout } = useUserStore();
-
+  
   const onLogout = async () => {
     await setLogout();
     navigate('/');
@@ -38,21 +38,23 @@ export default function DropdownMenu() {
       >
         <Menu.Items className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-sub shadow-lg focus:outline-none'>
           <div className='py-1'>
-            <Menu.Item>
-              {({ active }) => (
-                <Link to='/posts/new' className={classNames(active ? 'text-accent' : 'text-title', 'block px-4 py-2 text-sm')}>
-                  새 글 작성
-                </Link>
-              )}
-            </Menu.Item>
             {token && (
-              <Menu.Item onClick={onLogout}>
-                {({ active }) => (
-                  <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
-                    로그아웃
-                  </button>
-                )}
-              </Menu.Item>
+              <>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link to='/posts/new' className={classNames(active ? 'text-accent' : 'text-title', 'block px-4 py-2 text-sm')}>
+                      새 글 작성
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item onClick={onLogout}>
+                  {({ active }) => (
+                    <button type='submit' className={classNames(active ? 'text-accent' : 'text-title', 'block w-full px-4 py-2 text-left text-sm')}>
+                      로그아웃
+                    </button>
+                  )}
+                </Menu.Item>
+              </>
             )}
           </div>
         </Menu.Items>

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import SearchInput from 'components/SearchInput';
-import SearchResult from 'components/SearchResult';
 import useDebounce from 'hooks/useDebounce';
 import React, { useState } from 'react';
 import { getSearch } from 'api/posts';
+import SearchResult from './SearchResult';
 
 export default function Search() {
   const [search, setSearch] = useState('');
@@ -26,7 +26,7 @@ export default function Search() {
         <div className='flex items-center border border-neutral-400 bg-sub p-4'>
           <SearchInput search={search} setSearch={setSearch} />
         </div>
-        {data && <SearchResult isLoading={isLoading} isError={isError} data={data}/>}
+        {data && <SearchResult isLoading={isLoading} isError={isError} data={data} />}
       </div>
     </section>
   );

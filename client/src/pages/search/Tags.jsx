@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import SearchResult from 'components/SearchResult';
 import { useParams } from 'react-router-dom';
 import { getSearchTags } from 'api/posts';
+import SearchResult from './SearchResult';
 
 export default function Tags() {
   const { tag } = useParams();

@@ -1,8 +1,8 @@
 import React from 'react';
-import SearchResult from 'components/SearchResult';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getSearchUserPosts } from 'api/posts';
+import SearchResult from './SearchResult';
 
 export default function UserPostsView() {
   const { displayName } = useParams();
