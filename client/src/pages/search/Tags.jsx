@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getSearchTags } from 'api/posts';
 import SearchResult from './SearchResult';
+import Wrapper from 'components/Wrapper';
 
 export default function Tags() {
   const { tag } = useParams();
@@ -13,11 +14,9 @@ export default function Tags() {
   });
 
   return (
-    <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-      <div className='mx-auto max-w-2xl py-10 lg:mx-0 lg:max-w-none'>
-        <h1 className='text-3xl font-bold text-title'># {tag}</h1>
-        {data && <SearchResult isLoading={isLoading} isError={isError} data={data} />}
-      </div>
-    </section>
+    <Wrapper>
+      <h1 className='text-3xl font-bold text-title'># {tag}</h1>
+      {data && <SearchResult isLoading={isLoading} isError={isError} data={data} />}
+    </Wrapper>
   );
 }

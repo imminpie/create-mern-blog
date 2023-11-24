@@ -12,7 +12,7 @@ module.exports = {
         other: 'rgb(var(--color-other) / <alpha-value>)',
         accent: '#55b988',
         accentHover: '#5ac490',
-        closeHover: '#b5b5b5',
+        closeHover: '#dcdcdc',
         danger: '#e75b6f',
       },
     },

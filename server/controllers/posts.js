@@ -99,10 +99,10 @@ export const getSearchUserPosts = async (req, res) => {
     const { displayName } = req.params;
 
     const writer = await User.findOne({ displayName }, { _id: 1 });
-    if (!writer) return res.status(200).json([]);
+    if (!writer) return res.status(200).end();
 
     const posts = await Post.find({ writer: writer._id });
-    if (!posts.length) return res.status(200).json([]);
+    if (!posts.length) return res.status(200).end();
 
     const users = await User.findById(writer);
 

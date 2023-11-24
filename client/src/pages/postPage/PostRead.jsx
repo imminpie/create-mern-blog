@@ -1,6 +1,6 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { deletePost, fetchPost } from 'api/posts';
 import MDEditor from '@uiw/react-md-editor';
@@ -9,6 +9,8 @@ import Modals from 'components/Modals';
 import { formatAgo } from 'util/date';
 import NotFound from 'pages/NotFound';
 import useUserStore from 'state';
+import Wrapper from 'components/Wrapper';
+import TagLink from 'components/TagLink';
 
 export default function PostRead() {
   const { id } = useParams();
@@ -18,11 +20,7 @@ export default function PostRead() {
   const { token } = useUserStore();
   const { user } = useUserStore();
 
-  const {
-    isLoading,
-    isError,
-    data: post,
-  } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ['posts', id],
     queryFn: () => fetchPost(id),
   });
@@ -43,49 +41,36 @@ export default function PostRead() {
     handleModalStateChange();
   };
 
-  const handleUserPosts = () => {
-    const data = { writer: post.writer, displayName: post.displayName };
-    navigate(`/@${post.displayName}`, { state: data });
-  };
-
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <NotFound />;
 
   return (
-    <>
-      <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mx-auto max-w-2xl py-12 lg:mx-0 lg:max-w-none'>
-          <h1 className='text-3xl font-bold tracking-tight text-title'>{post.title}</h1>
-          <div className='mb-6 mt-4 flex justify-between text-sm'>
-            <p className='text-title'>
-              <span className='cursor-pointer hover:underline hover:underline-offset-4' onClick={handleUserPosts}>
-                {post.displayName}
-              </span>
-              <span className='px-2'>|</span>
-              {formatAgo(post.updatedAt, 'ko')}
-            </p>
-            {token && post.writer === user?._id && (
-              <div className='text-other'>
-                <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
-                  수정
-                </button>
-                <button className='ml-3 hover:text-content' onClick={handleModalStateChange}>
-                  삭제
-                </button>
-              </div>
-            )}
+    <Wrapper>
+      <h1 className='title'>{data.title}</h1>
+      <div className='mt-4 flex justify-between text-sm'>
+        <p className='flex gap-x-2 text-title'>
+          <span className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => navigate(`/${data.displayName}`)}>
+            {data.displayName}
+          </span>
+          <span>|</span>
+          {formatAgo(data.updatedAt, 'ko')}
+        </p>
+        {token && data.writer === user?._id && (
+          <div className='flex gap-x-3 text-other'>
+            <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
+              수정
+            </button>
+            <button className='hover:text-content' onClick={handleModalStateChange}>
+              삭제
+            </button>
           </div>
-          {post.tags.map((tag, idx) => (
-            <Link to={`/tags/${tag}`} key={idx} className='mr-3 inline-block h-8 rounded-2xl bg-accent px-4 text-sm leading-8 text-white'>
-              # {tag}
-            </Link>
-          ))}
-          <div className='my-12 text-base leading-7 text-title'>
-            <MDEditor.Markdown source={`${post.content}`} />
-          </div>
-        </div>
-      </section>
+        )}
+      </div>
+      {data.tags && data.tags.map((tag, idx) => <TagLink tag={tag} key={idx} />)}
+      <div className='my-12 text-base leading-7 text-title'>
+        <MDEditor.Markdown source={data.content} />
+      </div>
       {isOpen && <Modals isOpen={isOpen} onClose={handleClose} onDelete={handleDelete} />}
-    </>
+    </Wrapper>
   );
 }

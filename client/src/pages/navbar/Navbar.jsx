@@ -25,7 +25,7 @@ export default function Navbar() {
             {token ? (
               <DropdownMenu />
             ) : (
-              <Link to='/login' className='rounded-2xl bg-accent px-3 py-1 text-sm font-semibold text-white hover:bg-accentHover'>
+              <Link to='/login' className='btn-success rounded-2xl px-3 py-1 text-sm  text-white '>
                 로그인
               </Link>
             )}

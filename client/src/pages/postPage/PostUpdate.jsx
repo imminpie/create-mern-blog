@@ -6,6 +6,7 @@ import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
 import NotFound from 'pages/NotFound';
 import useUserStore from 'state';
+import Wrapper from 'components/Wrapper';
 
 export default function PostUpdate() {
   const { id } = useParams();
@@ -16,11 +17,13 @@ export default function PostUpdate() {
   const {
     isLoading,
     isError,
-    data: post,
+    data,
   } = useQuery({
     queryKey: ['posts', id],
     queryFn: () => fetchPost(id),
   });
+
+  console.log(data);
 
   const updatePostMutation = useMutation({
     mutationFn: updatePost,
@@ -42,10 +45,8 @@ export default function PostUpdate() {
   if (isError) return <NotFound />;
 
   return (
-    <section className='mx-auto max-w-7xl px-6 lg:px-8'>
-      <div className='mx-auto mt-2 max-w-2xl py-8 lg:mx-0 lg:max-w-none '>
-        <PostForm onSubmit={handleFormSubmit} initialValue={post} />
-      </div>
-    </section>
+    <Wrapper>
+      <PostForm onSubmit={handleFormSubmit} initialValue={data} />
+    </Wrapper>
   );
 }
