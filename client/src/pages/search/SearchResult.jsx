@@ -19,36 +19,32 @@ export default function SearchResult({ isLoading, isError, data }) {
 
   return (
     <>
-      {!isHome && <p className='pb-8 pt-5 text-content'>{data.length > 0 ? `총 ${data.length}개의 게시글을 찾았습니다.` : `검색 결과가 없습니다. 😢`}</p>}
-      {data.map(({ _id, title, content, tags, displayName, updatedAt }) => (
-        <article key={_id} className={`${isHome ? 'card' : 'mb-12'} text-sm text-content`}>
-          <Link to={`/posts/${_id}`}>
-            <div className={`${isHome ? '' : 'lg:grid lg:grid-cols-3 lg:gap-x-8'} relative`}>
-              {content.match(regex) && <img src={content.match(regex)[1]} alt='post images' className='h-48 w-full object-cover object-center' loading='lazy' />}
-              <div className='col-span-2'>
-                <h3 className='mt-3 line-clamp-1 text-lg font-semibold leading-6 text-title group-hover:text-content'>{title}</h3>
-                <p className='mt-5 line-clamp-3 leading-6'>{RemoveMarkdown(content)}</p>
+      {data &&
+        data.map(({ _id, title, content, tags, displayName, updatedAt }) => (
+          <article className={`${isHome ? 'card' : 'mb-12 lg:grid'} text-sm text-content`} key={_id}>
+            <Link className={`${isHome ? '' : 'gap-5 lg:grid lg:grid-cols-3'}`} to={`/posts/${_id}`}>
+              {content.match(regex) && <img src={content.match(regex)[1]} alt='post images' loading='lazy' className='h-48 w-full object-cover object-center' />}
+              <div className={`${isHome ? '' : 'lg:col-span-2 lg:my-0'} mt-5`}>
+                <h2 className='line-clamp-1 text-lg font-bold leading-6 text-title'>{title}</h2>
+                <p className='line-clamp-3 pt-3 text-sm leading-6 text-content'>{RemoveMarkdown(content)}</p>
               </div>
-            </div>
-          </Link>
-          {!isHome && tags.length > 0 && (
-            <div>
-              {tags.map((tag, idx) => (
-                <TagLink tag={tag} key={idx} />
-              ))}
-            </div>
-          )}
-          <div className='relative mt-8 flex w-full items-center justify-between gap-x-2 text-xs text-other'>
-            <div className='flex items-center gap-x-2'>
-              <UserCircleIcon className='h-6 w-6' />
-              <p className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+            </Link>
+            {!isHome && tags.length > 0 && (
+              <div>
+                {tags.map((tag, idx) => (
+                  <TagLink tag={tag} key={idx} />
+                ))}
+              </div>
+            )}
+            <p className='mt-5 flex w-full items-center justify-between text-xs text-other'>
+              <span className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+                <UserCircleIcon className='mr-2 h-6 w-6' />
                 {displayName}
-              </p>
-            </div>
-            <p>{formatAgo(updatedAt, 'ko')}</p>
-          </div>
-        </article>
-      ))}
+              </span>
+              <span>{formatAgo(updatedAt, 'ko')}</span>
+            </p>
+          </article>
+        ))}
     </>
   );
 }

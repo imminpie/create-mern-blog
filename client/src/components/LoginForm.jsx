@@ -15,7 +15,7 @@ export default function LoginForm({ pageType, initialValues, validationSchema, o
             <div className='mt-10 grid gap-6 text-title'>
               <div>
                 <label htmlFor='email'>이메일</label>
-                <input type='text' onChange={handleChange} onBlur={handleBlur} value={values.email} name='email' id='email' placeholder='you@email.com' className='inputGroup' />
+                <input type='text' onChange={handleChange} onBlur={handleBlur} value={values.email} name='email' id='email' placeholder='you@email.com' className='inputForm' />
                 {Boolean(touched.email) && Boolean(errors.email) && <p className='mt-1 text-danger'>{errors.email}</p>}
               </div>
               <div>
@@ -29,7 +29,7 @@ export default function LoginForm({ pageType, initialValues, validationSchema, o
                   id='password'
                   placeholder='비밀번호 입력(문자, 숫자, 특수문자 포함 8~20자)'
                   autoComplete='off'
-                  className='inputGroup'
+                  className='inputForm'
                 />
                 {Boolean(touched.password) && Boolean(errors.password) && <p className='mt-1 text-danger'>{errors.password}</p>}
               </div>
@@ -46,7 +46,7 @@ export default function LoginForm({ pageType, initialValues, validationSchema, o
                       id='confirmPassword'
                       placeholder='비밀번호 확인'
                       autoComplete='off'
-                      className='inputGroup'
+                      className='inputForm'
                     />
                     {Boolean(touched.confirmPassword) && Boolean(errors.confirmPassword) && <p className='mt-1 text-danger'>{errors.confirmPassword}</p>}
                   </div>
@@ -60,7 +60,7 @@ export default function LoginForm({ pageType, initialValues, validationSchema, o
                       name='displayName'
                       id='displayName'
                       placeholder='닉네임 입력(2~10자)'
-                      className='inputGroup'
+                      className='inputForm'
                     />
                     {Boolean(touched.displayName) && Boolean(errors.displayName) && <p className='mt-1 text-danger'>{errors.displayName}</p>}
                   </div>
