@@ -10,7 +10,7 @@ import authRoutes from './routes/auth.js';
 import { setImagePosts } from './controllers/posts.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { setUserInfo } from './controllers/user.js';
+import { setUserProfile } from './controllers/user.js';
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -38,7 +38,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post('/posts/imagePosts', upload.single('picture'), setImagePosts);
-app.patch('/user/formData', upload.single('file'), setUserInfo);
+app.patch('/user/formData', upload.single('file'), setUserProfile);
 
 /* ROUTER */
 app.use('/posts', postRoutes);
