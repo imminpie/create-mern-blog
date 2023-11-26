@@ -12,11 +12,10 @@ export default function DropdownMenu() {
   const navigate = useNavigate();
   const { token } = useUserStore();
   const { setLogout } = useUserStore();
-  
+
   const onLogout = async () => {
     await setLogout();
     navigate('/');
-    window.location.reload();
   };
 
   return (
