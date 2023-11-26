@@ -14,16 +14,10 @@ export default function PostUpdate() {
   const queryClient = useQueryClient();
   const { token } = useUserStore();
 
-  const {
-    isLoading,
-    isError,
-    data,
-  } = useQuery({
+  const { isLoading, isError, data } = useQuery({
     queryKey: ['posts', id],
     queryFn: () => fetchPost(id),
   });
-
-  console.log(data);
 
   const updatePostMutation = useMutation({
     mutationFn: updatePost,

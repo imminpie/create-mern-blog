@@ -9,8 +9,7 @@ import Wrapper from 'components/Wrapper';
 export default function PostCreate() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { user } = useUserStore();
-  const { token } = useUserStore();
+  const { user, token } = useUserStore();
 
   const createPostMutation = useMutation({
     mutationFn: createPost,

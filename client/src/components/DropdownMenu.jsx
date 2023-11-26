@@ -10,8 +10,7 @@ function classNames(...classes) {
 
 export default function DropdownMenu() {
   const navigate = useNavigate();
-  const { token } = useUserStore();
-  const { setLogout } = useUserStore();
+  const { token, setLogout } = useUserStore();
 
   const onLogout = async () => {
     await setLogout();
@@ -43,6 +42,13 @@ export default function DropdownMenu() {
                   {({ active }) => (
                     <Link to='/posts/new' className={classNames(active ? 'text-accent' : 'text-title', 'block px-4 py-2 text-sm')}>
                       새 글 작성
+                    </Link>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <Link to='/profile' className={classNames(active ? 'text-accent' : 'text-title', 'block px-4 py-2 text-sm')}>
+                      내 프로필
                     </Link>
                   )}
                 </Menu.Item>

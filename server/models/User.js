@@ -25,6 +25,16 @@ const userSchema = new mongoose.Schema(
       max: 10,
       trim: true,
     },
+    intro: {
+      type: String,
+      max: 20,
+    },
+    avatar: {
+      type: String,
+    },
+    file: {
+      type: Object,
+    },
   },
   { timestamps: true }
 );

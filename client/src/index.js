@@ -8,6 +8,7 @@ import ProtectedRoute from 'pages/authPage/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 import PostList from 'pages/postPage/PostList';
 import NotFound from 'pages/NotFound';
+import Profile from 'pages/userPage/Profile';
 
 const PostCreate = lazy(() => import('pages/postPage/PostCreate'));
 const PostRead = lazy(() => import('pages/postPage/PostRead'));
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
       { path: '/tags/:tag', element: <Tags /> },
       { path: '/login', element: <LoginPage /> },
       { path: '/register', element: <RegisterPage /> },
+      {
+        path: '/profile',
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
