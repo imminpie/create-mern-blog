@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { UserCircleIcon } from '@heroicons/react/20/solid';
 import { Link, useNavigate } from 'react-router-dom';
 import useUserStore from 'state/index.js';
 
@@ -10,7 +9,7 @@ function classNames(...classes) {
 
 export default function DropdownMenu() {
   const navigate = useNavigate();
-  const { token, setLogout } = useUserStore();
+  const { user, token, setLogout } = useUserStore();
 
   const onLogout = async () => {
     await setLogout();
@@ -18,10 +17,12 @@ export default function DropdownMenu() {
   };
 
   return (
-    <Menu as='div' className='relative inline-block h-5 text-left'>
+    <Menu as='div' className='relative inline-block h-6 text-left'>
       <div>
         <Menu.Button>
-          <UserCircleIcon className='h-5 w-5' aria-hidden='true' />
+          <div className='mr-2 h-6 w-6 overflow-hidden rounded-full' aria-hidden='true'>
+            <img src={user.avatar ? user.avatar : '/assets/profile.png'} alt='avatar' />
+          </div>
         </Menu.Button>
       </div>
 

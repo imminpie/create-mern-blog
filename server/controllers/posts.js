@@ -32,6 +32,8 @@ export const getPosts = async (req, res) => {
     const formattedPosts = posts.map((post, idx) => ({
       ...post.toObject(),
       displayName: users[idx].displayName,
+      avatar: users[idx].avatar,
+      intro: users[idx].intro,
     }));
 
     res.status(200).json(formattedPosts);
@@ -69,6 +71,8 @@ export const getSearch = async (req, res) => {
     const formattedPosts = posts.map((post, idx) => ({
       ...post.toObject(),
       displayName: users[idx].displayName,
+      avatar: users[idx].avatar,
+      intro: users[idx].intro,
     }));
 
     res.status(200).json(formattedPosts);
@@ -86,6 +90,8 @@ export const getSearchTags = async (req, res) => {
     const formattedPosts = posts.map((post, idx) => ({
       ...post.toObject(),
       displayName: users[idx].displayName,
+      avatar: users[idx].avatar,
+      intro: users[idx].intro,
     }));
 
     res.status(200).json(formattedPosts);
@@ -109,6 +115,8 @@ export const getSearchUserPosts = async (req, res) => {
     const formattedPosts = posts.map((post) => ({
       ...post.toObject(),
       displayName: users.displayName,
+      avatar: users.avatar,
+      intro: users.intro,
     }));
 
     res.status(200).json(formattedPosts);

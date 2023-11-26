@@ -18,8 +18,16 @@ export default function UserPostsView() {
     <Wrapper>
       {data && data.length > 0 && (
         <>
-          <h1 className='text-3xl font-bold text-title'>{displayName}</h1>
-          <p className='mb-8 mt-5 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
+          <div className='flex items-center gap-5 border-b border-b-neutral-300 pb-10'>
+            <div className='h-28 w-28 overflow-hidden rounded-full'>
+              <img src={data[0].avatar ? data[0].avatar : '/assets/profile.png'} alt='avatar' />
+            </div>
+            <div>
+              <h1 className='title'>{data[0].displayName}</h1>
+              <p className='text-content'>{data[0].intro}</p>
+            </div>
+          </div>
+          <p className='my-8 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
           <SearchResult isLoading={isLoading} isError={isError} data={data} />
         </>
       )}

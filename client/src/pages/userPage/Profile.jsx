@@ -3,7 +3,7 @@ import { Field, Formik } from 'formik';
 import useUserStore from 'state';
 import PreviewImage from 'components/PreviewImage.jsx';
 import { useNavigate } from 'react-router-dom';
-import { userInfo } from 'api/user';
+import { getUserInfo } from 'api/user';
 import * as yup from 'yup';
 
 export default function Profile() {
@@ -47,7 +47,7 @@ export default function Profile() {
         formData.append('picturePath', file.name);
       }
 
-      const updated = await userInfo(formData);
+      const updated = await getUserInfo(formData);
       onSubmitProps.resetForm();
 
       if (updated) {

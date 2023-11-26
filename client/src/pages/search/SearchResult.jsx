@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { UserCircleIcon } from '@heroicons/react/20/solid';
 import LoadingSpinner from 'components/LoadingSpinner';
 import RemoveMarkdown from 'remove-markdown';
 import TagLink from 'components/TagLink';
@@ -20,7 +19,7 @@ export default function SearchResult({ isLoading, isError, data }) {
   return (
     <>
       {data &&
-        data.map(({ _id, title, content, tags, displayName, updatedAt }) => (
+        data.map(({ _id, title, content, tags, displayName, updatedAt, intro, avatar }) => (
           <article className={`${isHome ? 'card' : 'mb-12 lg:grid'} text-sm text-content`} key={_id}>
             <Link className={`${isHome ? '' : 'gap-5 lg:grid lg:grid-cols-3'}`} to={`/posts/${_id}`}>
               {content.match(regex) && <img src={content.match(regex)[1]} alt='post images' loading='lazy' className='h-48 w-full object-cover object-center' />}
@@ -36,13 +35,15 @@ export default function SearchResult({ isLoading, isError, data }) {
                 ))}
               </div>
             )}
-            <p className='mt-5 flex w-full items-center justify-between text-xs text-other'>
-              <span className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
-                <UserCircleIcon className='mr-2 h-6 w-6' />
+            <div className='mt-5 flex w-full items-center justify-between text-xs text-other'>
+              <p className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+                <button className='mr-2 h-6 w-6 overflow-hidden rounded-full' type='button'>
+                  <img src={avatar ? avatar : '/assets/profile.png'} alt='avatar' />
+                </button>
                 {displayName}
-              </span>
+              </p>
               <span>{formatAgo(updatedAt, 'ko')}</span>
-            </p>
+            </div>
           </article>
         ))}
     </>
