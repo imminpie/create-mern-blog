@@ -3,6 +3,8 @@ import { Menu, Transition } from '@headlessui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import useUserStore from 'state/index.js';
 
+const AVATAR_DEFAULT = '/assets/profile.png';
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -21,7 +23,7 @@ export default function DropdownMenu() {
       <div>
         <Menu.Button>
           <div className='mr-2 h-6 w-6 overflow-hidden rounded-full' aria-hidden='true'>
-            <img src={user.avatar ? user.avatar : '/assets/profile.png'} alt='avatar' />
+            <img src={user.avatar || AVATAR_DEFAULT} alt='avatar' />
           </div>
         </Menu.Button>
       </div>

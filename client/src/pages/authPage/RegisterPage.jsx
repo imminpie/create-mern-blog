@@ -26,10 +26,10 @@ const initialValuesRegister = {
 export default function RegisterPage() {
   const navigate = useNavigate();
 
-  const onRegister = async (values, onSubmitProps) => {
+  const onRegister = async (values, { resetForm }) => {
     const savedUser = await register(values);
-    onSubmitProps.resetForm();
+    resetForm();
     savedUser && navigate('/login');
   };
-  return <LoginForm pageType='register' initialValues={initialValuesRegister} validationSchema={registerSchema} onSubmit={onRegister} onError={false} />;
+  return <LoginForm pageType='register' initialValues={initialValuesRegister} validationSchema={registerSchema} onSubmit={onRegister} />;
 }

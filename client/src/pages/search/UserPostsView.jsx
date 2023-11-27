@@ -6,6 +6,8 @@ import SearchResult from './SearchResult';
 import Wrapper from 'components/Wrapper';
 import NotFound from 'pages/NotFound';
 
+const AVATAR_DEFAULT = '/assets/profile.png';
+
 export default function UserPostsView() {
   const { displayName } = useParams();
 
@@ -20,7 +22,7 @@ export default function UserPostsView() {
         <>
           <div className='flex items-center gap-5 border-b border-b-neutral-300 pb-10'>
             <div className='h-28 w-28 overflow-hidden rounded-full'>
-              <img src={data[0].avatar ? data[0].avatar : '/assets/profile.png'} alt='avatar' />
+              <img src={data[0].avatar || AVATAR_DEFAULT} alt='avatar' />
             </div>
             <div>
               <h1 className='title'>{data[0].displayName}</h1>

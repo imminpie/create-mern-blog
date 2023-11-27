@@ -16,8 +16,8 @@ export default function PostRead() {
   const { id } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isOpen, handleModalStateChange] = useModals();
   const { user, token } = useUserStore();
+  const [isOpen, handleModalStateChange] = useModals();
 
   const { isLoading, isError, data } = useQuery({
     queryKey: ['posts', id],

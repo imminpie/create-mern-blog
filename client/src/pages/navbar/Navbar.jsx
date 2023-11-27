@@ -12,7 +12,7 @@ export default function Navbar() {
     <header className='bg-main'>
       <nav className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto flex h-16 max-w-2xl items-center justify-between lg:mx-0 lg:max-w-none'>
-          <Link to='/' className='text-lg font-bold leading-none text-title'>
+          <Link to='/' className='text-lg font-bold text-title'>
             BLOG
           </Link>
           <div className='flex items-center text-title'>
@@ -25,7 +25,7 @@ export default function Navbar() {
             {token ? (
               <DropdownMenu />
             ) : (
-              <Link to='/login' className='btn-success rounded-2xl px-3 py-1 text-sm text-white '>
+              <Link to='/login' className='btn-success rounded-2xl px-3 py-1 text-sm text-white'>
                 로그인
               </Link>
             )}

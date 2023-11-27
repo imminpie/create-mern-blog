@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProtectedRoute from 'pages/authPage/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 import PostList from 'pages/postPage/PostList';
-import NotFound from 'pages/NotFound';
 import Profile from 'pages/userPage/Profile';
+import NotFound from 'pages/NotFound';
 
 const PostCreate = lazy(() => import('pages/postPage/PostCreate'));
 const PostRead = lazy(() => import('pages/postPage/PostRead'));

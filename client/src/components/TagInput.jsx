@@ -27,11 +27,11 @@ export default function TagInput({ post, setPost }) {
   return (
     <div className='flex flex-wrap'>
       {post.tags?.map((tag, idx) => (
-        <button type='button' key={idx} onClick={handleTagClick} className='bg-accent mb-3 mr-3 h-8 rounded-2xl px-4 text-sm text-white'>
+        <button className='tags mb-3 mt-0 leading-8' type='button' key={idx} onClick={handleTagClick}>
           {`# ${tag}`}
         </button>
       ))}
-      <input type='text' value={tags} onChange={handleTags} onKeyDown={handleKeyDown} placeholder='태그를 입력하세요' className='mb-3 h-8 bg-transparent text-title outline-none' />
+      <input className='mb-3 h-8 bg-transparent text-title outline-none' type='text' value={tags} onChange={handleTags} onKeyDown={handleKeyDown} placeholder='태그를 입력하세요' />
     </div>
   );
 }

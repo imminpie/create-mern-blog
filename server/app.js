@@ -8,9 +8,9 @@ import mongoose from 'mongoose';
 import postRoutes from './routes/posts.js';
 import authRoutes from './routes/auth.js';
 import { setImagePosts } from './controllers/posts.js';
+import { setUserProfile } from './controllers/user.js';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import { setUserProfile } from './controllers/user.js';
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -37,6 +37,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+/* ROUTES WITH FILES */
 app.post('/posts/imagePosts', upload.single('picture'), setImagePosts);
 app.patch('/user/formData', upload.single('file'), setUserProfile);
 

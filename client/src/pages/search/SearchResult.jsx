@@ -6,6 +6,8 @@ import TagLink from 'components/TagLink';
 import NotFound from 'pages/NotFound';
 import { formatAgo } from 'util/date';
 
+const AVATAR_DEFAULT = '/assets/profile.png';
+
 export default function SearchResult({ isLoading, isError, data }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ export default function SearchResult({ isLoading, isError, data }) {
             <div className='mt-5 flex w-full items-center justify-between text-xs text-other'>
               <p className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
                 <button className='mr-2 h-6 w-6 overflow-hidden rounded-full' type='button'>
-                  <img src={avatar ? avatar : '/assets/profile.png'} alt='avatar' />
+                  <img src={avatar || AVATAR_DEFAULT} alt='avatar' />
                 </button>
                 {displayName}
               </p>

@@ -17,22 +17,22 @@ const initialValuesLogin = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(false);
   const { setLogin } = useUserStore();
 
-  const onLogin = async (values, onSubmitProps) => {
+  const onLogin = async (values, { resetForm }) => {
     try {
       const loggedIn = await login(values);
-      onSubmitProps.resetForm();
+      resetForm();
       if (loggedIn) {
         setLogin({ user: loggedIn.user, token: loggedIn.token });
         navigate('/');
       }
     } catch (error) {
       console.error(error.response.data.message);
-      setIsError(true);
+      setError('아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요.');
     }
   };
 
-  return <LoginForm pageType='login' initialValues={initialValuesLogin} validationSchema={loginSchema} onSubmit={onLogin} onError={isError} />;
+  return <LoginForm pageType='login' initialValues={initialValuesLogin} validationSchema={loginSchema} onSubmit={onLogin} IsError={error} />;
 }
