@@ -12,8 +12,8 @@ export default function PreviewImage({ file, avatar }) {
   }
 
   return (
-    <div>
-      <img src={preview} alt='preview' />
+    <div className='h-36 w-36'>
+      <img src={preview} alt='preview' className='h-full w-full object-cover' />
     </div>
   );
 }
