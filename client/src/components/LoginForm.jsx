@@ -13,15 +13,46 @@ export default function LoginForm({ pageType, initialValues, validationSchema, o
         <form onSubmit={handleSubmit} className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
           <div className='text-sm sm:mx-auto sm:w-full sm:max-w-sm'>
             <h1 className='title text-center'>{isLogin ? '로그인' : '회원가입'}</h1>
-            <p className='text-center leading-10 text-other'>{isLogin ? '이메일과 비밀번호를 입력해 주세요.' : '회원가입을 위해 아래의 정보를 입력해 주세요.'}</p>
+            <p className='text-center leading-10 text-other'>
+              {isLogin ? '이메일과 비밀번호를 입력해 주세요.' : '회원가입을 위해 아래의 정보를 입력해 주세요.'}
+            </p>
+            
             <div className='mt-10 grid gap-6 text-title'>
-              <InputField className='inputField' type='text' label='이메일' name='email' placeholder='you@email.com' value={values.email} />
-              <InputField className='inputField' type='password' label='비밀번호' name='password' placeholder='비밀번호 입력(문자, 숫자, 특수문자 포함 8~20자)' value={values.password} />
+              <InputField
+                className='inputField'
+                type='text'
+                label='이메일'
+                name='email'
+                placeholder='you@email.com'
+                value={values.email}
+              />
+              <InputField
+                className='inputField'
+                type='password'
+                label='비밀번호'
+                name='password'
+                placeholder='비밀번호 입력(문자, 숫자, 특수문자 포함 8~20자)'
+                value={values.password}
+              />
 
               {isRegister && (
                 <>
-                  <InputField className='inputField' type='password' label='비밀번호 확인' name='confirmPassword' placeholder='비밀번호 확인' value={values.confirmPassword} />
-                  <InputField className='inputField' type='text' label='닉네임' name='displayName' placeholder='닉네임 입력(2~10자)' value={values.displayName} />
+                  <InputField
+                    className='inputField'
+                    type='password'
+                    label='비밀번호 확인'
+                    name='confirmPassword'
+                    placeholder='비밀번호 확인'
+                    value={values.confirmPassword}
+                  />
+                  <InputField
+                    className='inputField'
+                    type='text'
+                    label='닉네임'
+                    name='displayName'
+                    placeholder='닉네임 입력(2~10자)'
+                    value={values.displayName}
+                  />
                 </>
               )}
 

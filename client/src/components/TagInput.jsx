@@ -31,7 +31,14 @@ export default function TagInput({ post, setPost }) {
           {`# ${tag}`}
         </button>
       ))}
-      <input className='mb-3 h-8 bg-transparent text-title outline-none' type='text' value={tags} onChange={handleTags} onKeyDown={handleKeyDown} placeholder='태그를 입력하세요' />
+      <input
+        className='mb-3 h-8 bg-transparent text-title outline-none'
+        type='text'
+        value={tags}
+        onChange={handleTags}
+        onKeyDown={handleKeyDown}
+        placeholder='태그를 입력하세요'
+      />
     </div>
   );
 }
