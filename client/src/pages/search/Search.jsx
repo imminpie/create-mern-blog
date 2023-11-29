@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { getSearch } from 'api/posts';
 import SearchResult from './SearchResult';
 import Wrapper from 'components/Wrapper';
+import LoadingSpinner from 'components/LoadingSpinner';
+import NotFound from 'components/NotFound';
 
 export default function Search() {
   const [search, setSearch] = useState('');
@@ -21,22 +23,21 @@ export default function Search() {
     enabled: !!search,
   });
 
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <NotFound />;
+
   return (
     <Wrapper>
       <div className='flex items-center border border-neutral-400 bg-sub p-4'>
         <SearchInput search={search} setSearch={setSearch} />
       </div>
-      {data && data.length > 0 && (
+      {data?.length > 0 && (
         <>
           <p className='mb-8 mt-5 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
-          <SearchResult isLoading={isLoading} isError={isError} data={data} />
+          <SearchResult data={data} />
         </>
       )}
-      {data?.length === 0 && (
-        <p className='mb-8 mt-5 text-title'>
-          <b>{search}</b> 에 대한 검색 결과가 없습니다.
-        </p>
-      )}
+      {data?.length === 0 && <p className='mb-8 mt-5 text-title'>검색 결과가 없습니다.</p>}
     </Wrapper>
   );
 }

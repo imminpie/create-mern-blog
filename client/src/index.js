@@ -8,7 +8,8 @@ import ProtectedRoute from 'pages/authPage/ProtectedRoute';
 import LoadingSpinner from 'components/LoadingSpinner';
 import PostList from 'pages/postPage/PostList';
 import Profile from 'pages/userPage/Profile';
-import NotFound from 'pages/NotFound';
+import NotFound from 'components/NotFound';
+
 
 const PostCreate = lazy(() => import('pages/postPage/PostCreate'));
 const PostRead = lazy(() => import('pages/postPage/PostRead'));

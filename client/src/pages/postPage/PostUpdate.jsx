@@ -4,9 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { fetchPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
-import NotFound from 'pages/NotFound';
 import useUserStore from 'state';
 import Wrapper from 'components/Wrapper';
+import NotFound from 'components/NotFound';
 
 export default function PostUpdate() {
   const { id } = useParams();

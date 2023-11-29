@@ -3,14 +3,14 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { deletePost, fetchPost } from 'api/posts';
+import TagDisplay from 'components/TagDisplay';
 import MDEditor from '@uiw/react-md-editor';
+import NotFound from 'components/NotFound';
+import Wrapper from 'components/Wrapper';
 import useModals from 'hooks/useModals';
 import Modals from 'components/Modals';
 import { formatAgo } from 'util/date';
-import NotFound from 'pages/NotFound';
 import useUserStore from 'state';
-import Wrapper from 'components/Wrapper';
-import TagLink from 'components/TagLink';
 
 export default function PostRead() {
   const { id } = useParams();
@@ -43,18 +43,19 @@ export default function PostRead() {
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <NotFound />;
 
+  const { title, content, displayName, updatedAt, writer, tags } = data;
+
   return (
     <Wrapper>
-      <h1 className='title'>{data.title}</h1>
+      <h1 className='title'>{title}</h1>
       <div className='mt-4 flex justify-between text-sm'>
         <p className='flex gap-x-2 text-title'>
-          <span className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => navigate(`/${data.displayName}`)}>
-            {data.displayName}
+          <span className='cursor-pointer hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+            {displayName}
           </span>
-          <span>|</span>
-          {formatAgo(data.updatedAt, 'ko')}
+          <span>| {formatAgo(updatedAt, 'ko')}</span>
         </p>
-        {token && data.writer === user?._id && (
+        {token && writer === user?._id && (
           <div className='flex gap-x-3 text-other'>
             <button className='hover:text-content' onClick={() => navigate(`/posts/${id}/edit`)}>
               수정
@@ -65,9 +66,9 @@ export default function PostRead() {
           </div>
         )}
       </div>
-      {data.tags && data.tags.map((tag, idx) => <TagLink tag={tag} key={idx} />)}
+      {tags && <TagDisplay tags={tags} />}
       <div className='my-12 text-base leading-7 text-title'>
-        <MDEditor.Markdown source={data.content} />
+        <MDEditor.Markdown source={content} />
       </div>
       {isOpen && <Modals isOpen={isOpen} onClose={handleClose} onDelete={handleDelete} />}
     </Wrapper>
