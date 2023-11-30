@@ -10,13 +10,13 @@ import PostList from 'pages/postPage/PostList';
 import Profile from 'pages/userPage/Profile';
 import NotFound from 'components/NotFound';
 
-
 const PostCreate = lazy(() => import('pages/postPage/PostCreate'));
 const PostRead = lazy(() => import('pages/postPage/PostRead'));
 const PostUpdate = lazy(() => import('pages/postPage/PostUpdate'));
 const Search = lazy(() => import('pages/search/Search'));
 const Tags = lazy(() => import('pages/search/Tags'));
 const LoginPage = lazy(() => import('pages/authPage/LoginPage'));
+const KakaoCallback = lazy(() => import('pages/authPage/KakaoCallback'));
 const RegisterPage = lazy(() => import('pages/authPage/RegisterPage'));
 const UserPostsView = lazy(() => import('pages/search/UserPostsView'));
 
@@ -48,6 +48,7 @@ const router = createBrowserRouter([
       { path: '/search', element: <Search /> },
       { path: '/tags/:tag', element: <Tags /> },
       { path: '/login', element: <LoginPage /> },
+      { path: '/auth', element: <KakaoCallback /> },
       { path: '/register', element: <RegisterPage /> },
       {
         path: '/profile',
@@ -65,11 +66,11 @@ const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<LoadingSpinner />}>
-        <RouterProvider router={router} />
-      </Suspense>
-    </QueryClientProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <Suspense fallback={<LoadingSpinner />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  </QueryClientProvider>,
+  // </React.StrictMode>,
 );
