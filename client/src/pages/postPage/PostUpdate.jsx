@@ -26,7 +26,7 @@ export default function PostUpdate() {
       navigate(`/posts/${id}`);
     },
     onError: async (error) => {
-      console.error(`An error occurred: ${error.message}`);
+      console.error('Update Post error:', error);
     },
   });
 

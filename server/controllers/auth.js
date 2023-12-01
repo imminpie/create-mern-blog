@@ -42,7 +42,13 @@ export const login = async (req, res) => {
 
 export const kakaoLogin = async (req, res) => {
   try {
-    const { id, kakao_account: { email, profile: { nickname }}} = req.body;
+    const {
+      id,
+      kakao_account: {
+        email,
+        profile: { nickname },
+      },
+    } = req.body;
 
     const user = await User.findOne({ email: email });
     const password = id + email;
@@ -58,6 +64,7 @@ export const kakaoLogin = async (req, res) => {
 
       const newUser = new User({
         email,
+        snsId: id,
         password: passwordHash,
         displayName: nickname,
       });

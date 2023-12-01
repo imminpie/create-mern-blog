@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import useUserStore from 'state/index.js';
+import { logout } from 'api/auth';
 
 const AVATAR_DEFAULT = '/assets/profile.png';
 
@@ -11,11 +12,16 @@ function classNames(...classes) {
 
 export default function DropdownMenu() {
   const navigate = useNavigate();
-  const { user, token, setLogout } = useUserStore();
+  const { user, token, snsToken, setLogout } = useUserStore();
 
   const onLogout = async () => {
-    await setLogout();
-    navigate('/');
+    try {
+      user.snsId > 0 && (await logout(snsToken, user.snsId));
+      await setLogout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (

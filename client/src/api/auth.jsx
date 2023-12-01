@@ -12,7 +12,7 @@ export async function login(users) {
   return response.data;
 }
 
-/* */
+/*  KAKAO ACCESS TOKEN */
 export async function getAccessToken(code) {
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
@@ -28,6 +28,7 @@ export async function getAccessToken(code) {
   return response.data.access_token;
 }
 
+/* KAKAO USER INFO */
 export async function getUserInfo(accessToken) {
   const response = await axios.post(
     `https://kapi.kakao.com/v2/user/me`,
@@ -42,7 +43,23 @@ export async function getUserInfo(accessToken) {
   return response.data;
 }
 
+/* KAKAO LOGIN */
 export async function loginUser(user) {
   const response = await axios.post(`http://localhost:5000/auth/kakao`, user);
+  return response.data;
+}
+
+/* KAKAO LOGOUT */
+export async function logout(accessToken, targetId) {
+  const response = await axios.post(
+    `https://kapi.kakao.com/v1/user/logout`,
+    { target_id_type: 'user_id', target_id: targetId },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    },
+  );
+
   return response.data;
 }

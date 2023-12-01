@@ -18,7 +18,7 @@ export default function PostCreate() {
       navigate('/');
     },
     onError: async (error) => {
-      console.error(`An error occurred: ${error.message}`);
+      console.error('Create Post error:', error);
     },
   });
 

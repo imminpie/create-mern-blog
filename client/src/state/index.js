@@ -6,8 +6,9 @@ const useUserStore = create(
     (set) => ({
       user: null,
       token: null,
-      setLogin: (payload) => set({ user: payload.user, token: payload.token }),
-      setLogout: () => set({ user: null, token: null }),
+      snsToken: null,
+      setLogin: (payload) => set({ user: payload.user, token: payload.token, snsToken: payload.snsToken }),
+      setLogout: () => set({ user: null, token: null, snsToken: null }),
     }),
     {
       name: 'user-storage',

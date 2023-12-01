@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    snsId: {
+      type: String,
+      default: -1,
+    },
     password: {
       type: String,
       required: true,

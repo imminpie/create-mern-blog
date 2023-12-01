@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SearchResult from 'pages/search/SearchResult';
 import { fetchPosts } from 'api/posts';
+import LoadingSpinner from 'components/LoadingSpinner';
+import NotFound from 'components/NotFound';
 
 export default function PostList() {
   const { isLoading, isError, data } = useQuery({
@@ -9,11 +11,14 @@ export default function PostList() {
     queryFn: fetchPosts,
   });
 
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) return <NotFound />;
+
   return (
     <main className='mx-auto mt-5 max-w-7xl px-6 pb-12 lg:px-8'>
       {data && (
         <div className='mx-auto grid max-w-2xl grid-cols-1 gap-x-5 gap-y-5 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
-          <SearchResult isLoading={isLoading} isError={isError} data={data} />
+          <SearchResult data={data} />
         </div>
       )}
       {data?.length === 0 && (

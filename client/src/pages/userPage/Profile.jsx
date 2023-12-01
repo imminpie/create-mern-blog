@@ -85,9 +85,9 @@ export default function Profile() {
                   이미지 편집
                 </button>
               </div>
-              <InputField className='inputField' type='text' label='이메일' name='email' disabled />
-              <InputField className='inputField' type='text' label='닉네임' name='displayName' autoFocus />
-              <InputField className='inputField' type='text' label='한 줄 소개' name='intro' />
+              <InputField type='text' label='이메일' name='email' disabled />
+              <InputField type='text' label='닉네임' name='displayName' autoFocus />
+              <InputField type='text' label='한 줄 소개' name='intro' />
               <button className='btn-success w-full py-3 text-white' type='submit'>
                 수정
               </button>

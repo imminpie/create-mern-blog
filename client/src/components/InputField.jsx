@@ -6,7 +6,7 @@ export default function InputField({ label, ...props }) {
   return (
     <div>
       <label htmlFor={props.name}>{label}</label>
-      <input type='text' {...field} {...props} />
+      <input className='inputField' type='text' {...field} {...props} />
       {meta.touched && meta.error ? <div className='mt-1 text-danger'>{meta.error}</div> : null}
     </div>
   );
