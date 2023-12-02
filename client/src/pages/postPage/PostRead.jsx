@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
-import { deletePost, fetchPost } from 'api/posts';
+import { deletePost, getPost } from 'api/posts';
 import TagDisplay from 'components/TagDisplay';
 import MDEditor from '@uiw/react-md-editor';
 import NotFound from 'components/NotFound';
@@ -21,7 +21,7 @@ export default function PostRead() {
 
   const { isLoading, isError, data } = useQuery({
     queryKey: ['posts', id],
-    queryFn: () => fetchPost(id),
+    queryFn: () => getPost(id),
   });
 
   const deleteMutation = useMutation({

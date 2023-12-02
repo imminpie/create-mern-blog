@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
-import { fetchPost, updatePost } from 'api/posts';
+import { getPost, updatePost } from 'api/posts';
 import PostForm from 'components/PostForm';
 import useUserStore from 'state';
 import Wrapper from 'components/Wrapper';
@@ -16,7 +16,7 @@ export default function PostUpdate() {
 
   const { isLoading, isError, data } = useQuery({
     queryKey: ['posts', id],
-    queryFn: () => fetchPost(id),
+    queryFn: () => getPost(id),
   });
 
   const updatePostMutation = useMutation({

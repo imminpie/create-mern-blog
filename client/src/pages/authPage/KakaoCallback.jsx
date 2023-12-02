@@ -1,6 +1,6 @@
-import { getAccessToken, getUserInfo, loginUser } from 'api/auth';
-import LoadingSpinner from 'components/LoadingSpinner';
 import React, { useEffect } from 'react';
+import { getAccessToken, getUserInfo, login } from 'api/kakaoAuth';
+import LoadingSpinner from 'components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from 'state';
 
@@ -15,10 +15,10 @@ export default function KakaoCallback() {
 
         const accessToken = await getAccessToken(code);
         const user = await getUserInfo(accessToken);
-        const loggedIn = await loginUser(user);
+        const loggedIn = await login(user);
 
         if (loggedIn) {
-          setLogin({ user: loggedIn.user, token: loggedIn.token, snsToken: accessToken });
+          setLogin({ user: loggedIn.user, token: loggedIn.token, kakaoToken: accessToken });
           navigate('/');
         }
       } catch (error) {

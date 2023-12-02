@@ -2,12 +2,28 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
+// JWT 토큰 생성
+const generateTokenAndRespond = (res, user) => {
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  res.status(200).json({ token, user });
+};
+
+// bcrypt 를 사용하여 비밀번호 해싱
+const getPasswordHash = async (password) => {
+  const salt = await bcrypt.genSalt(10);
+  return bcrypt.hash(password, salt);
+};
+
+// bcrypt 를 사용하여 입력된 비밀번호와 사용자 비밀번호를 비교
+const getPasswordIsMatch = async (inputPassword, userPassword) => {
+  return await bcrypt.compare(inputPassword, userPassword);
+};
+
+/* REGISTER */
 export const register = async (req, res) => {
   try {
     const { email, password, displayName } = req.body;
-
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, salt);
+    const passwordHash = await getPasswordHash(password);
 
     const newUser = new User({
       email,
@@ -22,24 +38,24 @@ export const register = async (req, res) => {
   }
 };
 
+/* LOGIN */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
-    if (!user) return res.status(400).json({ message: 'User does not exist.' });
+    if (!user) return res.status(400).send('User does not exist.');
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    const isMatch = await getPasswordIsMatch(password, user.password);
+    if (!isMatch) return res.status(400).send('Invalid credentials');
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
-
-    res.status(200).json({ token, user });
+    generateTokenAndRespond(res, user);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
+/* KAKAO LOGIN */
 export const kakaoLogin = async (req, res) => {
   try {
     const {
@@ -51,20 +67,23 @@ export const kakaoLogin = async (req, res) => {
     } = req.body;
 
     const user = await User.findOne({ email: email });
-    const password = id + email;
+    const password = process.env.KAKAO_LOGIN_PASSWORD;
 
+    // 사용자가 존재하면 제공되는 비밀번호가 일치하는 확인
     if (user) {
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
+      const isMatch = await getPasswordIsMatch(password, user.password);
+      if (!isMatch) return res.status(400).send('Invalid credentials');
 
+      // 사용자 객체에서 비밀번호를 제거하고 토큰 생성
+      delete user.password;
       generateTokenAndRespond(res, user);
     } else {
-      const salt = await bcrypt.genSalt();
-      const passwordHash = await bcrypt.hash(password, salt);
+      // 사용자가 존재하지 않으면 카카오 정보로 회원가입
+      const passwordHash = await getPasswordHash(password);
 
       const newUser = new User({
         email,
-        snsId: id,
+        kakaoId: id,
         password: passwordHash,
         displayName: nickname,
       });
@@ -75,9 +94,4 @@ export const kakaoLogin = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
-
-const generateTokenAndRespond = (res, user) => {
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  res.status(200).json({ token, user });
 };

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SearchResult from 'pages/search/SearchResult';
-import { fetchPosts } from 'api/posts';
+import { getPosts } from 'api/posts';
 import LoadingSpinner from 'components/LoadingSpinner';
 import NotFound from 'components/NotFound';
 
 export default function PostList() {
   const { isLoading, isError, data } = useQuery({
     queryKey: ['posts'],
-    queryFn: fetchPosts,
+    queryFn: getPosts,
   });
 
   if (isLoading) return <LoadingSpinner />;

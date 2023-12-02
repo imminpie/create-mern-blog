@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    snsId: {
+    kakaoId: {
       type: String,
       default: -1,
     },

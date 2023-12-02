@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import useUserStore from 'state/index.js';
-import { logout } from 'api/auth';
+import { logout } from 'api/kakaoAuth';
 
 const AVATAR_DEFAULT = '/assets/profile.png';
 
@@ -12,11 +12,12 @@ function classNames(...classes) {
 
 export default function DropdownMenu() {
   const navigate = useNavigate();
-  const { user, token, snsToken, setLogout } = useUserStore();
+  const { user, token, kakaoToken, setLogout } = useUserStore();
 
   const onLogout = async () => {
     try {
-      user.snsId > 0 && (await logout(snsToken, user.snsId));
+      // 카카오 로그인을 사용한 사용자는 카카오 로그아웃을 진행한다.
+      user.kakaoId > 0 && (await logout(kakaoToken, user.kakaoId));
       await setLogout();
       navigate('/');
     } catch (error) {

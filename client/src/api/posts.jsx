@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 /* READ */
-export async function fetchPosts() {
+export async function getPosts() {
   const response = await axios.get('http://localhost:5000/posts');
   return response.data;
 }
 
-export async function fetchPost(id) {
+export async function getPost(id) {
   const response = await axios.get(`http://localhost:5000/posts/${id}`);
   return response.data;
 }
