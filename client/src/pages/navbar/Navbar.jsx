@@ -16,11 +16,11 @@ export default function Navbar() {
             BLOG
           </Link>
           <div className='flex items-center text-title'>
-            <Link to='/search'>
+            <Link to='/search' className='flex h-8 items-center'>
               <MagnifyingGlassIcon className='h-5 w-5' />
             </Link>
-            <button className='mx-4 h-5 w-5 transition delay-200 duration-100 ease-out' onClick={toggleDarkMode} type='button'>
-              {darkMode ? <MoonIcon /> : <SunIcon />}
+            <button className='mx-4 h-8 transition delay-200 duration-100 ease-out' onClick={toggleDarkMode} type='button'>
+              {darkMode ? <MoonIcon className='h-5 w-5' /> : <SunIcon className='h-5 w-5' />}
             </button>
             {token ? (
               <DropdownMenu />

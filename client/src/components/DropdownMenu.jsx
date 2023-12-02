@@ -26,14 +26,12 @@ export default function DropdownMenu() {
   };
 
   return (
-    <Menu as='div' className='relative inline-block h-6 text-left'>
-      <div>
-        <Menu.Button>
-          <div className='mr-2 h-6 w-6 overflow-hidden rounded-full' aria-hidden='true'>
-            <img src={user.avatar || AVATAR_DEFAULT} alt='avatar' />
-          </div>
-        </Menu.Button>
-      </div>
+    <Menu as='div' className='relative inline-block h-8 w-8 text-left '>
+      <Menu.Button>
+        <div className='overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-600' aria-hidden='true'>
+          <img className='h-8 w-8 object-cover object-center' src={user.avatar || AVATAR_DEFAULT} alt='avatar' />
+        </div>
+      </Menu.Button>
 
       <Transition
         as={Fragment}
