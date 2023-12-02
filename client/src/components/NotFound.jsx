@@ -11,7 +11,7 @@ export default function NotFound() {
             <p>죄송합니다. 페이지를 찾을 수 없습니다.</p>
             <p>존재하지 않는 주소를 입력하셨거나,</p>
             <p>요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.</p>
-            <div className='mx-auto w-2/5'>
+            <div className='mx-auto w-4/5 my-6'>
               <img src='/assets/not_found.png' alt='not_found' />
             </div>
           </div>

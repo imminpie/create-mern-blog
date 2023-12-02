@@ -39,8 +39,8 @@ export default function PostList() {
       </div>
 
       {data.pages[0]?.length === 0 && (
-        <div className='mx-auto mt-10 md:w-2/4 lg:w-2/5'>
-          <img src='/assets/no_posts.png' alt='no posts' />
+        <div className='mt-12'>
+          <img className='mx-auto' src='/assets/no_posts.png' alt='no posts' />
           <p className='text-center text-title'>현재 게시된 글이 없습니다. 새로운 글을 기대해주세요!</p>
         </div>
       )}

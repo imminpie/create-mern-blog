@@ -17,7 +17,7 @@ export default function MyEditor({ content, setContent }) {
 
   return (
     <>
-      <input ref={inputRef} className='inputFile hidden' type='file' accept='.jpg,.png,.jpeg,.gif' name='avatar' value={insertImg} onChange={inputImageHandler} />
+      <input ref={inputRef} className='inputFile hidden' type='file' accept='.jpg,.png,.jpeg,.gif,.svg' name='avatar' value={insertImg} onChange={inputImageHandler} />
       <div className='relative'>
         <MDEditor
           ref={editorRef}
