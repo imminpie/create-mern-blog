@@ -18,7 +18,7 @@ export default function UserPostsView() {
   });
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) return <NotFound />;
+  if (isError || !data || data.length === 0) return <NotFound />;
 
   const { avatar, intro } = data[0];
 
