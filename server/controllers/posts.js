@@ -42,7 +42,11 @@ export const setImagePosts = async (req, res) => {
 /* READ */
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const { page = 0, pageSize = 10 } = req.query;
+    const posts = await Post.find()
+      .skip(page * pageSize)
+      .limit(parseInt(pageSize));
+
     const formattedPosts = await fetchUsersAndFormatPosts(posts);
     res.status(200).json(formattedPosts);
   } catch (err) {

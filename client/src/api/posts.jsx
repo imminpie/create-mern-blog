@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 /* READ */
-export async function getPosts() {
-  const response = await axios.get('http://localhost:5000/posts');
+export async function getPosts(pageParam) {
+  const response = await axios.get(`http://localhost:5000/posts?page=${pageParam}&pageSize=10`);
   return response.data;
 }
 
