@@ -78,7 +78,7 @@ export default function Profile() {
             <h1 className='title text-center'>회원정보 수정</h1>
             <div className='mt-10 grid gap-6'>
               <div className='flex flex-col items-center'>
-                <div className='flex h-36 w-36 items-center justify-center overflow-hidden rounded-full border border-neutral-300'>
+                <div className='avatar-wrap flex h-36 w-36 items-center justify-center'>
                   <input className='hidden' type='file' name='file' onChange={(e) => handleFile(e, setFieldValue)} ref={inputRef} />
                   <PreviewImage file={values.file} avatar={values.avatar} />
                 </div>

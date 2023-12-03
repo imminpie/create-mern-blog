@@ -27,8 +27,8 @@ export default function UserPostsView() {
       {data?.length > 0 && (
         <>
           <div className='flex items-center gap-5 border-b border-b-neutral-300 pb-10'>
-            <div className='h-28 w-28 overflow-hidden rounded-full'>
-              <img src={avatar || AVATAR_DEFAULT} alt='avatar' />
+            <div className='avatar-wrap h-28 w-28'>
+              <img src={avatar || AVATAR_DEFAULT} alt='avatar' className='h-full w-full object-cover' />
             </div>
             <div>
               <h1 className='title'>{displayName}</h1>

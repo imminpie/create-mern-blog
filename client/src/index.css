@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --color-main: 245 245 245;
-    --color-sub: 255 255 255;
+    --color-sub: 250 250 250;
     --color-title: 38 38 38;
     --color-content: 64 64 64;
     --color-other: 115 115 115;
@@ -38,6 +38,9 @@
   }
   .inputField {
     @apply mt-2 block w-full bg-gray-200 p-3 text-title outline-none disabled:bg-neutral-200 disabled:text-neutral-400 dark:bg-neutral-800 dark:disabled:bg-neutral-600;
+  }
+  .avatar-wrap {
+    @apply overflow-hidden rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-800;
   }
 }
 

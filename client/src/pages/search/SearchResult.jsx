@@ -33,13 +33,10 @@ export default function SearchResult({ data }) {
               </div>
             </Link>
             {!isHome && tags.length > 0 && <TagDisplay tags={tags} />}
-            <div className='mt-5 flex w-full items-center justify-between text-xs text-other'>
-              <p
-                className='flex cursor-pointer items-center hover:underline hover:underline-offset-4'
-                onClick={() => navigate(`/${displayName}`)}
-              >
-                <button className='mr-2 h-6 w-6 overflow-hidden rounded-full' type='button'>
-                  <img src={avatar || AVATAR_DEFAULT} alt='avatar' />
+            <div className='mt-5 flex w-full items-center justify-between text-xs text-content'>
+              <p className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+                <button className='avatar-wrap mr-2 h-6 w-6' type='button'>
+                  <img src={avatar || AVATAR_DEFAULT} alt='avatar' className='h-full w-full object-cover' />
                 </button>
                 {displayName}
               </p>
