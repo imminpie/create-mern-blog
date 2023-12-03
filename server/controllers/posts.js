@@ -44,6 +44,7 @@ export const getPosts = async (req, res) => {
   try {
     const { page = 0, pageSize = 6 } = req.query;
     const posts = await Post.find()
+      .sort({ createdAt: -1 })
       .skip(page * pageSize)
       .limit(parseInt(pageSize));
 
