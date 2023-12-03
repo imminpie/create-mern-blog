@@ -13,7 +13,7 @@ const AVATAR_DEFAULT = '/assets/profile.png';
 export default function Profile() {
   const navigate = useNavigate();
   const inputRef = useRef();
-  const { user, token, setLogin } = useUserStore();
+  const { user, token, setLogin, kakaoToken } = useUserStore();
 
   const userSchema = yup.object().shape({
     displayName: yup.string().min(2, '2~10자를 입력해 주세요.').max(10, '2~10자를 입력해 주세요.').required('닉네임을 입력해 주세요.'),
@@ -45,7 +45,7 @@ export default function Profile() {
   const setUserProfileMutation = useMutation({
     mutationFn: setUserProfile,
     onSuccess: async (updatedUserProfile) => {
-      const updatedUser = { user: updatedUserProfile, token };
+      const updatedUser = { user: updatedUserProfile, token, kakaoToken };
       setLogin(updatedUser);
       navigate('/');
     },
