@@ -42,7 +42,7 @@ export const setImagePosts = async (req, res) => {
 /* 게시글 목록 조회 */
 export const getPosts = async (req, res) => {
   try {
-    const { page = 0, pageSize = 10 } = req.query;
+    const { page = 0, pageSize = 6 } = req.query;
     const posts = await Post.find()
       .skip(page * pageSize)
       .limit(parseInt(pageSize));

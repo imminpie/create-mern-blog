@@ -5,7 +5,7 @@ import axios from 'axios';
  * @param {number} pageParam - 페이지 번호
  */
 export async function getPosts(pageParam) {
-  const response = await axios.get(`http://localhost:5000/posts?page=${pageParam}&pageSize=10`);
+  const response = await axios.get(`http://localhost:5000/posts?page=${pageParam}&pageSize=6`);
   return response.data;
 }
 
