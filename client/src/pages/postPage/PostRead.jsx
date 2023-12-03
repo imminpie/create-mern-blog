@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { deletePost, getPost } from 'api/posts';
@@ -15,7 +15,6 @@ import useUserStore from 'state';
 export default function PostRead() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { user, token } = useUserStore();
   const [isOpen, handleModalStateChange] = useModals();
 
@@ -27,7 +26,6 @@ export default function PostRead() {
   const deleteMutation = useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
       navigate('/');
     },
   });

@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 
+/* 사용자 프로필 등록 */
 export const setUserProfile = async (req, res) => {
   try {
     const { _id, displayName, intro } = req.body;

@@ -2,24 +2,37 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-// JWT 토큰 생성
+/**
+ * JWT 토큰 생성
+ * @param {Object} res - EXPRESS 응답 객체
+ * @param {Object} user - 사용자 정보
+ */
 const generateTokenAndRespond = (res, user) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   res.status(200).json({ token, user });
 };
 
-// bcrypt 를 사용하여 비밀번호 해싱
+/**
+ * bcrypt 를 사용하여 비밀번호 해싱
+ * @param {String} password - 해싱할 비밀번호
+ * @returns {Promise<String>} - 해싱된 비밀번호
+ */
 const getPasswordHash = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return bcrypt.hash(password, salt);
 };
 
-// bcrypt 를 사용하여 입력된 비밀번호와 사용자 비밀번호를 비교
+/**
+ * bcrypt 를 사용하여 입력된 비밀번호와 사용자 비밀번호를 비교
+ * @param {String} inputPassword - 입력된 비밀번호
+ * @param {String} userPassword  - 해싱된 비밀번호
+ * @returns {Promise<boolean>} - 비밀번호 일치 여부를 반환
+ */
 const getPasswordIsMatch = async (inputPassword, userPassword) => {
   return await bcrypt.compare(inputPassword, userPassword);
 };
 
-/* REGISTER */
+/* 회원가입 */
 export const register = async (req, res) => {
   try {
     const { email, password, displayName } = req.body;
@@ -38,7 +51,18 @@ export const register = async (req, res) => {
   }
 };
 
-/* LOGIN */
+/* 이메일 중복 확인 */
+export const checkEmailIsUnique = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const isUnique = await User.find({ email: email }).count();
+    res.status(201).json(isUnique);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+/* 로그인 */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -55,7 +79,7 @@ export const login = async (req, res) => {
   }
 };
 
-/* KAKAO LOGIN */
+/* 카카오 회원가입 및 로그인 */
 export const kakaoLogin = async (req, res) => {
   try {
     const {
@@ -66,6 +90,7 @@ export const kakaoLogin = async (req, res) => {
       },
     } = req.body;
 
+    // 사용자가 존재하는지 확인
     const user = await User.findOne({ email: email });
     const password = process.env.KAKAO_LOGIN_PASSWORD;
 

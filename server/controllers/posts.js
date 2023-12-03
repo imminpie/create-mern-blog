@@ -2,10 +2,9 @@ import Post from '../models/Post.js';
 import User from '../models/User.js';
 
 /**
- * 각 게시글 작성자에 대한 사용자 정보를 가져오고 게시글을 형식화하는 함수
- *
- * @param {Array} posts - Post 문서들로 이루어진 배열
- * @returns {Array} 추가된 사용자 정보가 포함된 형식화된 게시글들로 이루어진 배열
+ * 각 게시글에 작성자 정보를 추가하는 함수
+ * @param {Array} posts - 게시글 정보
+ * @returns {Promise<Array>} 추가된 사용자 정보를 반환
  */
 const fetchUsersAndFormatPosts = async (posts) => {
   const users = await Promise.all(posts.map((post) => User.findById(post.writer)));
@@ -17,7 +16,7 @@ const fetchUsersAndFormatPosts = async (posts) => {
   }));
 };
 
-/* CREATE */
+/* 새로운 게시글 생성 */
 export const createPost = async (req, res) => {
   try {
     const { title, content, tags, user: writer } = req.body;
@@ -30,6 +29,7 @@ export const createPost = async (req, res) => {
   }
 };
 
+/* 이미지 업로드 */
 export const setImagePosts = async (req, res) => {
   try {
     const { filename } = req.file;
@@ -39,7 +39,7 @@ export const setImagePosts = async (req, res) => {
   }
 };
 
-/* READ */
+/* 게시글 목록 조회 */
 export const getPosts = async (req, res) => {
   try {
     const { page = 0, pageSize = 10 } = req.query;
@@ -54,6 +54,7 @@ export const getPosts = async (req, res) => {
   }
 };
 
+/* 특정 게시글 조회 */
 export const getPost = async (req, res) => {
   try {
     const { id } = req.params;
@@ -65,6 +66,7 @@ export const getPost = async (req, res) => {
   }
 };
 
+/* 키워드로 게시글 조회 */
 export const getSearch = async (req, res) => {
   try {
     const { q: keyword } = req.query;
@@ -83,6 +85,7 @@ export const getSearch = async (req, res) => {
   }
 };
 
+/* 태그로 게시글 조회 */
 export const getSearchTags = async (req, res) => {
   try {
     const { q: tag } = req.query;
@@ -94,10 +97,10 @@ export const getSearchTags = async (req, res) => {
   }
 };
 
+/* 닉네임으로 게시글 조회 */
 export const getSearchUserPosts = async (req, res) => {
   try {
     const { displayName } = req.params;
-
     const writer = await User.findOne({ displayName }, { _id: 1 });
     if (!writer) return res.status(200).end();
 
@@ -111,7 +114,7 @@ export const getSearchUserPosts = async (req, res) => {
   }
 };
 
-/* UPDATE */
+/* 게시글 수정 */
 export const updatePost = async (req, res) => {
   try {
     const { id } = req.params;
@@ -123,12 +126,12 @@ export const updatePost = async (req, res) => {
   }
 };
 
-/* DELETE */
+/* 게시글 삭제 */
 export const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
-    await Post.findByIdAndDelete(id);
-    res.status(204).json({ success: true });
+    const deletedPost = await Post.findByIdAndDelete(id);
+    res.status(204).json(deletedPost);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

@@ -39,7 +39,7 @@ const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.post('/posts/imagePosts', upload.single('picture'), setImagePosts);
-app.patch('/user/formData', upload.single('file'), setUserProfile);
+app.patch('/user/profile', upload.single('file'), setUserProfile);
 
 /* ROUTER */
 app.use('/posts', postRoutes);

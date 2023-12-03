@@ -16,7 +16,8 @@ export default function Profile() {
   const { user, token, setLogin } = useUserStore();
 
   const userSchema = yup.object().shape({
-    displayName: yup.string().required('닉네임을 입력해 주세요.'),
+    displayName: yup.string().min(2, '2~10자를 입력해 주세요.').max(10, '2~10자를 입력해 주세요.').required('닉네임을 입력해 주세요.'),
+    intro: yup.string().max(20, '최대 20자까지 가능합니다.'),
   });
 
   const initialValues = {
