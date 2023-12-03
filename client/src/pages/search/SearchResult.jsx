@@ -22,10 +22,15 @@ export default function SearchResult({ data }) {
     <>
       {data &&
         data.map(({ _id, title, content, tags, displayName, updatedAt, avatar }) => (
-          <article className={`${isHome ? 'card' : 'mb-12 lg:grid'} text-sm text-content`} key={_id}>
+          <article className={`${isHome ? 'isCard' : 'noCard'} text-sm text-content`} key={_id}>
             <Link className={`${isHome ? '' : 'gap-5 lg:grid lg:grid-cols-3'} block w-full`} to={`/posts/${_id}`}>
               {getImagePath(content) && (
-                <img src={getImagePath(content)} alt='post images' loading='lazy' className='h-52 w-full object-cover object-center' />
+                <img
+                  src={getImagePath(content)}
+                  alt='post images'
+                  loading='lazy'
+                  className={`${isHome ? '' : 'lg:h-40'} h-64 w-full object-cover object-center`}
+                />
               )}
               <div className={`${isHome ? '' : 'lg:col-span-2 lg:my-0'} mt-5`}>
                 <h2 className='line-clamp-1 text-lg font-bold leading-6 text-title'>{title}</h2>
@@ -34,7 +39,10 @@ export default function SearchResult({ data }) {
             </Link>
             {!isHome && tags.length > 0 && <TagDisplay tags={tags} />}
             <div className='mt-5 flex w-full items-center justify-between text-xs text-content'>
-              <p className='flex cursor-pointer items-center hover:underline hover:underline-offset-4' onClick={() => navigate(`/${displayName}`)}>
+              <p
+                className='flex cursor-pointer items-center hover:underline hover:underline-offset-4'
+                onClick={() => navigate(`/${displayName}`)}
+              >
                 <button className='avatar-wrap mr-2 h-6 w-6' type='button'>
                   <img src={avatar || AVATAR_DEFAULT} alt='avatar' className='h-full w-full object-cover' />
                 </button>

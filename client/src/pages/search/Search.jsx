@@ -33,11 +33,11 @@ export default function Search() {
       </div>
       {data?.length > 0 && (
         <>
-          <p className='mb-8 mt-5 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
+          <p className='search-text'>총 {data.length}개의 게시글을 찾았습니다.</p>
           <SearchResult data={data} />
         </>
       )}
-      {data?.length === 0 && <p className='mb-8 mt-5 text-title'>검색 결과가 없습니다.</p>}
+      {data?.length === 0 && <p className='search-text'>검색 결과가 없습니다.</p>}
     </Wrapper>
   );
 }

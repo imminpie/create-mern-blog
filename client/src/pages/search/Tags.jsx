@@ -23,7 +23,7 @@ export default function Tags() {
       {data?.length > 0 && (
         <>
           <h1 className='text-3xl font-bold text-title'># {tag}</h1>
-          <p className='mb-8 mt-5 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
+          <p className='search-text'>총 {data.length}개의 게시글을 찾았습니다.</p>
           <SearchResult data={data} />
         </>
       )}

@@ -35,7 +35,7 @@ export default function UserPostsView() {
               <p className='text-content'>{intro}</p>
             </div>
           </div>
-          <p className='my-8 text-title'>총 {data.length}개의 게시글을 찾았습니다.</p>
+          <p className='search-text'>총 {data.length}개의 게시글을 찾았습니다.</p>
           <SearchResult data={data} />
         </>
       )}
