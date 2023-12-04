@@ -23,8 +23,7 @@ export default function PostList() {
     if (inView) {
       fetchNextPage();
     }
-    // eslint-disable-next-line
-  }, [inView]);
+  }, [inView, fetchNextPage]);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) return <NotFound />;
