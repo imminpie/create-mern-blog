@@ -64,6 +64,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
