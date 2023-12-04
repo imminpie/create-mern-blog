@@ -3,10 +3,10 @@ import SearchInput from 'components/SearchInput';
 import useDebounce from 'hooks/useDebounce';
 import React, { useState } from 'react';
 import { getSearch } from 'api/posts';
-import SearchResult from './SearchResult';
 import Wrapper from 'components/Wrapper';
 import LoadingSpinner from 'components/LoadingSpinner';
 import NotFound from 'components/NotFound';
+import SearchResultsSection from 'components/SearchResultsSection';
 
 export default function Search() {
   const [search, setSearch] = useState('');
@@ -31,13 +31,9 @@ export default function Search() {
       <div className='flex items-center border border-neutral-400 bg-sub p-4'>
         <SearchInput search={search} setSearch={setSearch} />
       </div>
-      {data?.length > 0 && (
-        <>
-          <p className='search-text'>총 {data.length}개의 게시글을 찾았습니다.</p>
-          <SearchResult data={data} />
-        </>
-      )}
+
       {data?.length === 0 && <p className='search-text'>검색 결과가 없습니다.</p>}
+      {data?.length > 0 && <SearchResultsSection data={data} />}
     </Wrapper>
   );
 }

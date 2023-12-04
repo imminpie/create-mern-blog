@@ -6,7 +6,7 @@ export default function SearchInput({ search, setSearch }) {
 
   return (
     <>
-      <label htmlFor='search' className='mr-3 mt-1 h-6 w-6 cursor-pointer text-other'>
+      <label htmlFor='search' className='mr-3 h-6 w-6 cursor-pointer text-other'>
         <MagnifyingGlassIcon />
       </label>
       <input

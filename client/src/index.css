@@ -46,7 +46,7 @@
     @apply overflow-hidden rounded-full border border-neutral-300 bg-white dark:border-neutral-700 dark:bg-neutral-800;
   }
   .search-text {
-    @apply my-8 text-lg font-semibold text-title;
+    @apply my-8 text-lg text-title;
   }
 }
 

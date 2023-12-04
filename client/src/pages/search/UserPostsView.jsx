@@ -2,10 +2,10 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { getSearchUserPosts } from 'api/posts';
-import SearchResult from './SearchResult';
 import Wrapper from 'components/Wrapper';
 import LoadingSpinner from 'components/LoadingSpinner';
 import NotFound from 'components/NotFound';
+import SearchResultsSection from 'components/SearchResultsSection';
 
 const AVATAR_DEFAULT = '/assets/profile.png';
 
@@ -35,8 +35,7 @@ export default function UserPostsView() {
               <p className='text-content'>{intro}</p>
             </div>
           </div>
-          <p className='search-text'>총 {data.length}개의 게시글을 찾았습니다.</p>
-          <SearchResult data={data} />
+          <SearchResultsSection data={data} />
         </>
       )}
       {(!data || data?.length === 0) && <NotFound />}

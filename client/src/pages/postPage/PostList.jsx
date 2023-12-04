@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import SearchResult from 'pages/search/SearchResult';
 import { getPosts } from 'api/posts';
 import LoadingSpinner from 'components/LoadingSpinner';
 import NotFound from 'components/NotFound';
 import { useInView } from 'react-intersection-observer';
+import SearchResultsSection from 'components/SearchResultsSection';
 
 export default function PostList() {
   const { ref, inView } = useInView();
@@ -33,7 +33,7 @@ export default function PostList() {
     <main className='relative mx-auto mt-5 h-screen max-w-7xl px-6 pb-12 lg:px-8'>
       <div className='mx-auto grid max-w-2xl grid-cols-1 gap-x-5 gap-y-5 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
         {data.pages?.map((posts, idx) => (
-          <SearchResult data={posts} key={idx} />
+          <SearchResultsSection data={posts} key={idx} />
         ))}
         {isFetchingNextPage && <LoadingSpinner />}
       </div>
