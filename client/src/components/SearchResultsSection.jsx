@@ -24,12 +24,12 @@ export default function SearchResultsSection({ data }) {
           총 <b>{data.length}</b>개의 게시글을 찾았습니다.
         </p>
       )}
-      {data?.map(({ _id, title, content, tags, displayName, updatedAt, avatar }) => (
+      {data?.map(({ _id, title, content, tags, displayName, createdAt, avatar }) => (
         <article className={classNames({ isCard: isHome, noCard: !isHome, 'text-sm text-content': true })} key={_id}>
           <Link className={classNames({ 'block w-full': true, 'gap-8 lg:grid lg:grid-cols-3': !isHome })} to={`/posts/${_id}`}>
             {getImagePath(content) && (
               <img
-                className={classNames({ 'lg:h-40': !isHome, 'h-64 w-full object-cover object-center': true })}
+                className={classNames({ 'lg:h-40': !isHome, 'h-48 w-full object-contain object-center': true })}
                 src={getImagePath(content)}
                 loading='lazy'
                 alt='post'
@@ -53,7 +53,7 @@ export default function SearchResultsSection({ data }) {
               </button>
               {displayName}
             </p>
-            <span>{formatAgo(updatedAt, 'ko')}</span>
+            <span>{formatAgo(createdAt, 'ko')}</span>
           </div>
         </article>
       ))}

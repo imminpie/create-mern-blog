@@ -30,7 +30,7 @@ export default function PostList() {
 
   return (
     <main className='relative mx-auto mt-5 h-screen max-w-7xl px-6 pb-12 lg:px-8'>
-      <div className='mx-auto grid max-w-2xl grid-cols-1 gap-x-5 gap-y-5 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+      <div className='mx-auto grid max-w-2xl grid-cols-1 gap-x-5 gap-y-5 pb-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
         {data.pages?.map((posts, idx) => (
           <SearchResultsSection data={posts} key={idx} />
         ))}

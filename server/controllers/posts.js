@@ -59,7 +59,7 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findById(id);
+    const post = await Post.findById(id).sort({ createdAt: -1 });
     const formattedPost = await fetchUsersAndFormatPosts([post]);
     res.status(200).json(formattedPost[0]);
   } catch (err) {
@@ -77,7 +77,7 @@ export const getSearch = async (req, res) => {
         { content: { $regex: '.*' + keyword + '.*', $options: 'i' } },
         { tags: { $regex: '.*' + keyword + '.*', $options: 'i' } },
       ],
-    });
+    }).sort({ createdAt: -1 });
 
     const formattedPosts = await fetchUsersAndFormatPosts(posts);
     res.status(200).json(formattedPosts);
@@ -90,7 +90,7 @@ export const getSearch = async (req, res) => {
 export const getSearchTags = async (req, res) => {
   try {
     const { q: tag } = req.query;
-    const posts = await Post.find({ tags: tag });
+    const posts = await Post.find({ tags: tag }).sort({ createdAt: -1 });
     const formattedPosts = await fetchUsersAndFormatPosts(posts);
     res.status(200).json(formattedPosts);
   } catch (err) {
@@ -105,7 +105,7 @@ export const getSearchUserPosts = async (req, res) => {
     const writer = await User.findOne({ displayName }, { _id: 1 });
     if (!writer) return res.status(200).end();
 
-    const posts = await Post.find({ writer: writer._id });
+    const posts = await Post.find({ writer: writer._id }).sort({ createdAt: -1 });
     if (!posts.length) return res.status(200).end();
 
     const formattedPosts = await fetchUsersAndFormatPosts(posts);

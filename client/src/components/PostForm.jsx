@@ -49,6 +49,7 @@ export default function PostForm({ onSubmit, initialValue }) {
         name='title'
         type='text'
         placeholder='제목을 입력하세요'
+        autoFocus
       />
       <TagInput post={post} setPost={setPost} />
       <MyEditor content={post.content} setContent={handleContentChange} />
